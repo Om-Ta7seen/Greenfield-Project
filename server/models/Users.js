@@ -25,6 +25,11 @@ exports.getUserByPhone = function (phone, callback) {
 }
 
 
+exports.getUserByUsername = function (username, callback) {
+    sequelize.query("select * from Users where UserName = :UserName", { replacements: { UserName: username }, type: Sequelize.QueryTypes.SELECT })
+        .then(callback)
+}
+
 
 
 exports.addUser = function (userObj, callback) {
