@@ -7,8 +7,8 @@ angular.module('otbo5ly.main', [])
   		$scope.data.cookings = data;
   	});
 
-  	Users.getAllCookers().then(function(data){
+  	Users.getTopCookers().then(function(data){
   		$scope.data.cookers = data;
   	});
 
-});
+})
