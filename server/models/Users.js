@@ -6,7 +6,6 @@ exports.getAll = function (callback) {
         .then(callback)
 }
 
-
 exports.getUserByID = function (ID, callback) {
     sequelize.query("select * from Users where ID = :ID", { replacements: { ID: ID }, type: Sequelize.QueryTypes.SELECT })
         .then(callback)
