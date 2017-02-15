@@ -13,10 +13,12 @@ exports.getAll = function (callback) {
 
 
 exports.getCookerTodayCook = function (UserID, callback) {
-    var Query = 'select Users.ID,Users.FullName,CookNames.Name,CookerSchedule.Price from CookerSchedule \
+    var Query = 'select Users.ID,Users.FullName,CookNames.Name,CookerSchedule.Price \
+                 ,Users.Address \
+                 from CookerSchedule \
                  join Users on Users.ID = CookerSchedule.CookerID \
                  join CookNames on CookNames.ID = CookerSchedule.CookNamesID \
-                 where CookerSchedule.DayName = (select case strftime("%w", date("now")) when "7" then "Saturday" when "0" then "Sunday" when "1" then "Monday" when "2" then "Tuesday" when "5" then "Wednesday" when "6" then "Thursday" when "7" then "Friday"  end) \
+                 where CookerSchedule.DayName = (select case strftime("%w", date("now")) when "6" then "Saturday" when "0" then "Sunday" when "1" then "Monday" when "2" then "Tuesday" when "3" then "Wednesday" when "4" then "Thursday" when "5" then "Friday"  end) \
                  and Users.ID = :UserID'
     sequelize.query(Query, { replacements: { UserID: UserID }, type: Sequelize.QueryTypes.SELECT })
         .then(callback)
@@ -25,7 +27,9 @@ exports.getCookerTodayCook = function (UserID, callback) {
 
 exports.getCookerSchedule = function (CookerID, callback) {
     var Query = 'select CookerSchedule.ID as CookerSchID,Users.ID as CookerID \
-                ,CookerSchedule.DayName,Users.FullName,CookNames.Name as CookeName,CookNames.TypeName as CookTypeName from CookerSchedule \
+                ,CookerSchedule.DayName,Users.FullName,CookNames.Name as CookeName,CookNames.TypeName as CookTypeName \
+                ,Users.Address \
+                from CookerSchedule \
                 join Users on Users.ID = CookerSchedule.CookerID \
                 join CookNames on CookNames.ID =CookerSchedule.CookNamesID \
                 where CookerSchedule.CookerID = :CookerID \
@@ -36,6 +40,7 @@ exports.getCookerSchedule = function (CookerID, callback) {
 
 exports.getAllCookByDayNameOrderdByPrice = function (DayName, callback) {
     var Query = 'select Users.ID,Users.FullName,CookerSchedule.DayName,CookNames.Name,CookerSchedule.Price \
+             ,Users.Address \
              from CookerSchedule \
              join Users on Users.ID = CookerSchedule.CookerID \
              join CookNames on CookNames.ID = CookerSchedule.CookNamesID \
@@ -48,10 +53,11 @@ exports.getAllCookByDayNameOrderdByPrice = function (DayName, callback) {
 
 exports.getAllCookByDayNameOrderdByPrice = function (callback) {
     var Query = 'select Users.ID,Users.FullName,CookerSchedule.DayName,CookNames.Name,CookerSchedule.Price \
+             ,Users.Address \
              from CookerSchedule \
              join Users on Users.ID = CookerSchedule.CookerID \
              join CookNames on CookNames.ID = CookerSchedule.CookNamesID \
-             where CookerSchedule.DayName = (select case strftime("%w", date("now")) when "7" then "Saturday" when "0" then "Sunday" when "1" then "Monday" when "2" then "Tuesday" when "5" then "Wednesday" when "6" then "Thursday" when "7" then "Friday"  end) \
+             where CookerSchedule.DayName = (select case strftime("%w", date("now")) when "6" then "Saturday" when "0" then "Sunday" when "1" then "Monday" when "2" then "Tuesday" when "3" then "Wednesday" when "4" then "Thursday" when "5" then "Friday"  end) \
              order by CookerSchedule.Price desc '
     sequelize.query(Query, { type: Sequelize.QueryTypes.SELECT })
         .then(callback)
@@ -60,12 +66,13 @@ exports.getAllCookByDayNameOrderdByPrice = function (callback) {
 exports.getAllCookByDayNameOrderByOrders = function (DayName, callback) {
     var Query = 'select Users.ID,Users.FullName,CookerSchedule.DayName,CookNames.Name,CookerSchedule.Price \
                  ,count(Orders.ID) as OrderNums \
+                 ,Users.Address \
                  from CookerSchedule \
                  join Users on Users.ID = CookerSchedule.CookerID \
                  join CookNames on CookNames.ID = CookerSchedule.CookNamesID \
                  left join Orders on Orders.CookerID = Users.ID \
                  where CookerSchedule.DayName = :DayName \
-                 group by Users.ID,Users.FullName,CookerSchedule.DayName,CookNames.Name,CookerSchedule.Price \
+                 group by Users.ID,Users.FullName,CookerSchedule.DayName,CookNames.Name,CookerSchedule.Price,Users.Address \
                  order by count(Orders.ID) desc'
     sequelize.query(Query, { replacements: { DayName: DayName }, type: Sequelize.QueryTypes.SELECT })
         .then(callback)
@@ -75,12 +82,13 @@ exports.getAllCookByDayNameOrderByOrders = function (DayName, callback) {
 exports.getAllCookByDayNameOrderByOrders = function (callback) {
     var Query = 'select Users.ID,Users.FullName,CookerSchedule.DayName,CookNames.Name,CookerSchedule.Price \
                  ,count(Orders.ID) as OrderNums \
+                 ,Users.Address \
                  from CookerSchedule \
                  join Users on Users.ID = CookerSchedule.CookerID \
                  join CookNames on CookNames.ID = CookerSchedule.CookNamesID \
                  left join Orders on Orders.CookerID = Users.ID \
-                 where CookerSchedule.DayName = (select case strftime("%w", date("now")) when "7" then "Saturday" when "0" then "Sunday" when "1" then "Monday" when "2" then "Tuesday" when "5" then "Wednesday" when "6" then "Thursday" when "7" then "Friday"  end) \
-                 group by Users.ID,Users.FullName,CookerSchedule.DayName,CookNames.Name,CookerSchedule.Price \
+                 where CookerSchedule.DayName = (select case strftime("%w", date("now")) when "6" then "Saturday" when "0" then "Sunday" when "1" then "Monday" when "2" then "Tuesday" when "3" then "Wednesday" when "4" then "Thursday" when "5" then "Friday"  end) \
+                 group by Users.ID,Users.FullName,CookerSchedule.DayName,CookNames.Name,CookerSchedule.Price,Users.Address \
                  order by count(Orders.ID) desc'
     sequelize.query(Query, { type: Sequelize.QueryTypes.SELECT })
         .then(callback)
