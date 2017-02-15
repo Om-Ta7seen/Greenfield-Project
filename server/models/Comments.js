@@ -6,6 +6,8 @@ exports.getAllCookerComments = function (callback) {
                  ,  InsertedUser.FullName  as InsertedUserFullName, InsertedUser.ImgUrl as InsertedUserImg \
                  ,  Cooker.FullName  as CookerFullName, Cooker.ImgUrl as CookerImgUrl \
                  ,Comments.HTMLBody as ComBody \
+                 ,Cooker.Address as CookerAddress \
+                 ,InsertedUser.Address as InsertedUserAddress \
                  from Comments \
                  join Users as InsertedUser On InsertedUser.ID = Comments.InsertUserID \
                  Join Users as Cooker on Cooker.ID = Comments.CookerID '
@@ -19,6 +21,8 @@ exports.getTopCookerComments = function (callback) {
                  ,  InsertedUser.FullName  as InsertedUserFullName, InsertedUser.ImgUrl as InsertedUserImg \
                  ,  Cooker.FullName  as CookerFullName, Cooker.ImgUrl as CookerImgUrl \
                  ,Comments.HTMLBody as ComBody \
+                 ,Cooker.Address as CookerAddress \
+                 ,InsertedUser.Address as InsertedUserAddress \
                  from Comments \
                  join Users as InsertedUser On InsertedUser.ID = Comments.InsertUserID \
                  Join Users as Cooker on Cooker.ID = Comments.CookerID \

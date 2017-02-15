@@ -33,9 +33,9 @@ exports.getUserByUsername = function (username, callback) {
 
 
 exports.addUser = function (userObj, callback) {
-    var Query = 'insert into Users (FullName,UserName,Email,PhoneNumber,UserTypeName,Password,ImgUrl) \
-                 values (:FullName,:UserName,:Email,:PhoneNumber,:UserTypeName,:Password,:ImgUrl)';
-    sequelize.query(Query, { replacements: { FullName: userObj.FullName, UserName: userObj.UserName, Email: userObj.Email, PhoneNumber: userObj.PhoneNumber, UserTypeName: userObj.UserTypeName, Password: userObj.Password, ImgUrl: userObj.ImgUrl }, type: Sequelize.QueryTypes.INSERT })
+    var Query = 'insert into Users (FullName,UserName,Email,PhoneNumber,UserTypeName,Password,ImgUrl,Address) \
+                 values (:FullName,:UserName,:Email,:PhoneNumber,:UserTypeName,:Password,:ImgUrl,:Address)';
+    sequelize.query(Query, { replacements: { FullName: userObj.FullName, UserName: userObj.UserName, Email: userObj.Email, PhoneNumber: userObj.PhoneNumber, UserTypeName: userObj.UserTypeName, Password: userObj.Password, ImgUrl: userObj.ImgUrl, Address: userObj.Address }, type: Sequelize.QueryTypes.INSERT })
         .then(callback)
 }
 
