@@ -18,7 +18,7 @@ exports.getCookerTodayCook = function (UserID, callback) {
                  from CookerSchedule \
                  join Users on Users.ID = CookerSchedule.CookerID \
                  join CookNames on CookNames.ID = CookerSchedule.CookNamesID \
-                 where CookerSchedule.DayName = (select case strftime("%w", date("now")) when "7" then "Saturday" when "0" then "Sunday" when "1" then "Monday" when "2" then "Tuesday" when "5" then "Wednesday" when "6" then "Thursday" when "7" then "Friday"  end) \
+                 where CookerSchedule.DayName = (select case strftime("%w", date("now")) when "6" then "Saturday" when "0" then "Sunday" when "1" then "Monday" when "2" then "Tuesday" when "3" then "Wednesday" when "4" then "Thursday" when "5" then "Friday"  end) \
                  and Users.ID = :UserID'
     sequelize.query(Query, { replacements: { UserID: UserID }, type: Sequelize.QueryTypes.SELECT })
         .then(callback)
