@@ -27,7 +27,8 @@ module.exports = {
 	signup: function(req, res){
 		//check
 		var user = req.body;
-
+		var days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+		var cookerID;
 		Users.getUserByUsername(user.UserName, function(user){
 			if(user){
 				console.log("this user already exist!!")
@@ -38,19 +39,33 @@ module.exports = {
 						res.status(500).send(err);
 					}
 					else{
+						cookerID = newUser.ID;
+						//insertin the cooker schedule 
+						for (var i = 0; i < days.length; i++) {
+							var obj = {}
+							obj.DayName = days[i];
+							obj.CookerID = cookerID;
+							obj.Price = req.schedule[i].Price;
+							obj.CookNamesID = req.schedule[i].CookNamesID;
+							CookerSchedule.addSchedule(obj);
+						}
+
+						//make surrrrrre of then
 						var token = jwt.encode(newUser, 'secret');
 						res.json({token: token});
 					}
-				})
+				});
+
+	
 			}
 		})
 	},
 
-	getUserProfile: function(req, res){
+	getCookerProfile: function(req, res){
 		//chekkk
 		var username = req.params.username;
 		var profile;
-		Users.getUserByUsername(username, function(err, user){
+		Users.getUserProfileInfo(username, function(err, user){
 			if(err){
 				res.status(500).send(err);
 			}
@@ -58,21 +73,21 @@ module.exports = {
 				Object.assign(profile,user);
 			}
 		})
-		//wait saeeddd
-		//CookerSchedule.getCookerSchedule()
+		
+		CookerSchedule.getCookerSchedule(username, function(schedule){
+			if(schedule){
+				Object.assign(profile,schedule);
+			}
+		})
 
-	}
+		CookerSchedule.getCookerTodayCook(username, function(cook){
+			if(cook){
+				Object.assign(profile,cook);
+				res.json(profile)
+			}
+		})
 
-	// getAllOrders: function(req, res){
-	// 	Orders.getAll(function(err, orders){
-	// 		if(err){
-	// 			res.status(500).send(err);
-	// 		}
-	// 		else{
-	// 			res.json(orders);
-	// 		}
-	// 	})
-	// },
+	},
 
 	addOrder: function(req, res){
 		var order = req.body;
@@ -85,7 +100,5 @@ module.exports = {
 			}
 		})
 	}
-
-
 
 }
