@@ -12,35 +12,37 @@ exports.getAll = function (callback) {
 }
 
 
-exports.getCookerTodayCook = function (UserID, callback) {
+exports.getCookerTodayCook = function (UserName, callback) {
     var Query = 'select Users.ID,Users.FullName,CookNames.Name,CookerSchedule.Price \
                  ,Users.Address \
                  from CookerSchedule \
                  join Users on Users.ID = CookerSchedule.CookerID \
                  join CookNames on CookNames.ID = CookerSchedule.CookNamesID \
                  where CookerSchedule.DayName = (select case strftime("%w", date("now")) when "6" then "Saturday" when "0" then "Sunday" when "1" then "Monday" when "2" then "Tuesday" when "3" then "Wednesday" when "4" then "Thursday" when "5" then "Friday"  end) \
-                 and Users.ID = :UserID'
-    sequelize.query(Query, { replacements: { UserID: UserID }, type: Sequelize.QueryTypes.SELECT })
+                 and Users.UserName = :UserName'
+    sequelize.query(Query, { replacements: { UserName: UserName }, type: Sequelize.QueryTypes.SELECT })
         .then(callback)
 }
 
 
-exports.getCookerSchedule = function (CookerID, callback) {
+exports.getCookerSchedule = function (UserName, callback) {
     var Query = 'select CookerSchedule.ID as CookerSchID,Users.ID as CookerID \
                 ,CookerSchedule.DayName,Users.FullName,CookNames.Name as CookeName,CookNames.TypeName as CookTypeName \
                 ,Users.Address \
+                ,CookerSchedule.Price \
                 from CookerSchedule \
                 join Users on Users.ID = CookerSchedule.CookerID \
                 join CookNames on CookNames.ID =CookerSchedule.CookNamesID \
-                where CookerSchedule.CookerID = :CookerID \
+                where Users.UserName = :UserName \
                 order by CookerSchedule.CookerID'
-    sequelize.query(Query, { replacements: { CookerID: CookerID }, type: Sequelize.QueryTypes.SELECT })
+    sequelize.query(Query, { replacements: { UserName: UserName }, type: Sequelize.QueryTypes.SELECT })
         .then(callback)
 }
 
 exports.getAllCookByDayNameOrderdByPrice = function (DayName, callback) {
     var Query = 'select Users.ID,Users.FullName,CookerSchedule.DayName,CookNames.Name,CookerSchedule.Price \
              ,Users.Address \
+             ,CookerSchedule.Price \
              from CookerSchedule \
              join Users on Users.ID = CookerSchedule.CookerID \
              join CookNames on CookNames.ID = CookerSchedule.CookNamesID \
@@ -54,6 +56,7 @@ exports.getAllCookByDayNameOrderdByPrice = function (DayName, callback) {
 exports.getAllCookByDayNameOrderdByPrice = function (callback) {
     var Query = 'select Users.ID,Users.FullName,CookerSchedule.DayName,CookNames.Name,CookerSchedule.Price \
              ,Users.Address \
+             ,CookerSchedule.Price \
              from CookerSchedule \
              join Users on Users.ID = CookerSchedule.CookerID \
              join CookNames on CookNames.ID = CookerSchedule.CookNamesID \
@@ -67,6 +70,7 @@ exports.getAllCookByDayNameOrderByOrders = function (DayName, callback) {
     var Query = 'select Users.ID,Users.FullName,CookerSchedule.DayName,CookNames.Name,CookerSchedule.Price \
                  ,count(Orders.ID) as OrderNums \
                  ,Users.Address \
+                 ,CookerSchedule.Price \
                  from CookerSchedule \
                  join Users on Users.ID = CookerSchedule.CookerID \
                  join CookNames on CookNames.ID = CookerSchedule.CookNamesID \
@@ -83,6 +87,7 @@ exports.getAllCookByDayNameOrderByOrders = function (callback) {
     var Query = 'select Users.ID,Users.FullName,CookerSchedule.DayName,CookNames.Name,CookerSchedule.Price \
                  ,count(Orders.ID) as OrderNums \
                  ,Users.Address \
+                 ,CookerSchedule.Price \
                  from CookerSchedule \
                  join Users on Users.ID = CookerSchedule.CookerID \
                  join CookNames on CookNames.ID = CookerSchedule.CookNamesID \
