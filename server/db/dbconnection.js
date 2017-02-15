@@ -9,7 +9,7 @@ var sequelize = new Sequelize('GFProj.sqlite', null, null, {
     min: 0,
     idle: 10000
   },
-  storage: './GFProj.sqlite'
+  storage: './server/GFProj.sqlite'
 });
 
 
