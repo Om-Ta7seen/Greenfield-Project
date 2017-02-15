@@ -1,39 +1,44 @@
 var jwt = require('jwt-simple');
 var Orders = require('./models/Orders.js');
 var Users = require('./models/Users.js')
-
+var CookerSchedule = require('./models/CookerSchedule.js')
 
 module.exports = {
 	signin: function(req, res){
-		//check
 		var username = req.body.UserName;
 		var password = req.body.Password;
 
-		Users.findOne({ where: {UserName: username, Password: password} }, function(err, found){
+		Users.getUserByUsername(username, function(err, user){
 			if(err){
 				res.status(500).send(err);
 			}
 			else{
-				var token = jwt.encode(found, 'secret');
-				res.json({token: token});
+				if(password === user.Password){
+					var token = jwt.encode(user, 'secret');
+					res.json({token: token});
+				}
+				else{
+					console.log('Wrong username Or password')
+				}
 			}
 		})
+
 	},
 	signup: function(req, res){
 		//check
 		var user = req.body;
 
-		Users.getUserByUsername(user.username, function(found){
-			if(found){
+		Users.getUserByUsername(user.UserName, function(user){
+			if(user){
 				console.log("this user already exist!!")
 			}
 			else{
-				Users.addUser(user, function(err, found){
+				Users.addUser(user, function(err, newUser){
 					if(err){
 						res.status(500).send(err);
 					}
 					else{
-						var token = jwt.encode(found, 'secret');
+						var token = jwt.encode(newUser, 'secret');
 						res.json({token: token});
 					}
 				})
@@ -41,19 +46,35 @@ module.exports = {
 		})
 	},
 
-	getAllOrders: function(req, res){
-		Orders.getAll(function(err, orders){
+	getUserProfile: function(req, res){
+		//chekkk
+		var username = req.params.username;
+		var profile;
+		Users.getUserByUsername(username, function(err, user){
 			if(err){
 				res.status(500).send(err);
 			}
 			else{
-				res.json(orders);
+				Object.assign(profile,user);
 			}
 		})
-	},
+		//wait saeeddd
+		//CookerSchedule.getCookerSchedule()
+
+	}
+
+	// getAllOrders: function(req, res){
+	// 	Orders.getAll(function(err, orders){
+	// 		if(err){
+	// 			res.status(500).send(err);
+	// 		}
+	// 		else{
+	// 			res.json(orders);
+	// 		}
+	// 	})
+	// },
 
 	addOrder: function(req, res){
-		//check
 		var order = req.body;
 		Orders.addOrder(order, function(err, order){
 			if(err){
@@ -64,5 +85,7 @@ module.exports = {
 			}
 		})
 	}
+
+
 
 }
