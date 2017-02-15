@@ -10,6 +10,7 @@ exports.getAll = function (callback) {
 exports.getOrderDetailsByOrderID = function (OrdersID, callback) {
     var Query = 'select Orders.ID as OrderID, NormalUser.FullName as UserFullName \
                 ,Cooker.FullName as CookerFullName,CookNames.Name as CookName , CookNames.TypeName as CookTypeName from Orders \
+                , Cooker.Address \
                 join OrderDetails on OrderDetails.OrdersID = Orders.ID \
                 join CookNames on CookNames.ID = OrderDetails.CookNameID \
                 join Users as Cooker on Cooker.ID = Orders.CookerID \
