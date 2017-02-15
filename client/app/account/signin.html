@@ -1,0 +1,24 @@
+<div id='signin' class="container">
+  <br><br><br>
+	<h1><strong>Sign In</strong></h1>
+	<form name="signinForm" ng-submit='signin()'>
+		<div class="form-group">
+			<label for="user">User Name:</label>
+			<input type="text" class="form-control" placeholder="your name" ng-model='user.username'>
+		</div>
+		<div class="form-group">
+			<label for="pwd">Password:</label>
+			<input type="password" class="form-control" placeholder="your password" ng-model='user.password'>
+			<br>
+		</div>
+		<input type="submit" class="btn btn-info" value="Submit">
+	</form>
+	<br>
+	<div>
+		<h4><strong>Don't you have account?</strong></h4>
+		<br>
+		<a href="#/signup">
+			<input type="submit" class="btn btn-danger" value="Signup">
+		</a>
+	</div>
+</div> 
