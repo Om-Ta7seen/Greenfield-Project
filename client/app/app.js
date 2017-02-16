@@ -29,8 +29,8 @@ angular.module('otbo5ly', [
       authenticate: true
     })
     .when('/order/:user/:cooker/:cooking', {
-      templateUrl: 'app/profile/orders.html',
-      controller: 'ProfileController',
+      templateUrl: 'app/userOrder/newOrder.html',
+      controller: 'NewOrderController',
       authenticate: true
     })
     .when('/', {
