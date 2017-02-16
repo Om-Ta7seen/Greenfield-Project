@@ -10,33 +10,35 @@ padding-top: 100px;
 
   <div class="col-md-4 col-xs-12" style="color: #fff;margin-top: 20px;">
 
-  <img src="{{ data.profileImg }}" class="img-responsive thumbnail">
+  <img ng-if="data.ImgUrl === null" src="/assets/chef.png" class="img-responsive thumbnail" style="margin: auto;">
+  <img ng-if="data.ImgUrl !== null" src="/{{ data.ImgUrl }}" class="img-responsive thumbnail" style="margin: auto;">
 
 </div>
 
 <div class="col-md-8 col-xs-12" style="color: #fff;margin-top: 20px;">
 
   <h1 style="font-weight: bold;color: #fff;text-align: left;margin-bottom: 40px;">
-  {{ data.fullName }}</h1>
+  {{ data.FullName }}</h1>
 
   <div class="col-md-6 col-xs-12">
     <i class="glyphicon glyphicon-phone" style="font-size: 3em;"></i>
     <p style="line-height: 40px;font-size: 15pt;">
-    {{ data.phone }}
+    {{ data.PhoneNumber }}
     </p>
   </div>
 
 
   <div class="col-md-6 col-xs-12">
     <i class="glyphicon glyphicon-envelope" style="font-size: 3em;"></i>
-    <p style="line-height: 40px;font-size: 15pt;">{{ data.email }}</p>
+    <p style="line-height: 40px;font-size: 15pt;">{{ data.Email }}</p>
   </div>
 
 </div>
 
-<div class="col-xs-12" style="margin-top: 30px;">  
-  <span style="padding: 20px;font-size: 1.7em;color: #fff;">Om ta7seen cooking for today is : {{ data.todayCooking }}</span>
-  <button class="btn btn-lg btn-primary">Order now</button>
+<div class="col-xs-12" style="margin-top: 50px;">  
+  <span style="padding: 20px;font-size: 1.7em;color: #fff;"><b>{{ data.FullName }}</b> cooking for today is : <b>{{ data.todayCook.Name }}</b>, just for 
+  <b>{{ data.todayCook.Price }}</b> JOD!</span>
+  <button href="#/orders/add/{{ data.user.UserName }}/{{ data.todayCook.ID }}/{{ userDetails.username }}" class="btn btn-lg btn-primary">Order now</button>
 </div>
 
 </div>
@@ -52,29 +54,17 @@ padding-top: 100px;
 
 
   <div class="panel panel-default">
-    <div class="panel-heading">Om ta7seen schedule</div>
+    <div class="panel-heading"><b>{{ data.user.FullName }}</b> schedule</div>
 
     <table class="table">
       <tbody>
       <tr style="font-weight: bold;">
         <td>Day</td>
-        <td>Sunday</td>
-        <td>Monday</td>
-        <td>Tuesday</td>
-        <td>Wednesday</td>
-        <td>Thursday</td>
-        <td>Friday</td>
-        <td>Saturday</td>
+        <td ng-repeat="cook in data.schedule">{{ cook.DayName }}</td>
       </tr>
       <tr>
         <td style="font-weight: bold;">Cooking</td>
-        <td>Yabrak</td>
-        <td>Mojadarah</td>
-        <td>Shakriyeh</td>
-        <td>Kebbeh</td>
-        <td>Kabseh</td>
-        <td>Mahshi koosa</td>
-        <td>Mlookhyeh</td>
+        <td ng-repeat="cook in data.schedule">{{ cook.CookeName }}</td>
       </tr>
     </tbody></table>
   </div>
@@ -82,51 +72,16 @@ padding-top: 100px;
 </div>
 <div class="row">
   <div class="page-header text-center">
-    <h1>User reviews <small>for Om ta7seen</small></h1>
+    <h1>User reviews <small> for {{ data.user.FullName }}</small></h1>
   </div>
 </div>
 <div class="row">
   <div class="col-md-10 col-md-offset-1 col-xs-12">
 
-    <div class="col-md-6 col-xs-12">
+    <div class="col-md-6 col-xs-12" ng-repeat="comment in data.comments">
       <div class="panel panel-default">
-        <div class="panel-body">Om ta7seen makes very delicious food, her shakriyah was amazing!</div>
-        <div class="panel-footer">Ali Al Ali</div>
-      </div>
-    </div>
-
-        <div class="col-md-6 col-xs-12">
-      <div class="panel panel-default">
-        <div class="panel-body">Om ta7seen makes very delicious food, her shakriyah was amazing!</div>
-        <div class="panel-footer">Ali Al Ali</div>
-      </div>
-    </div>
-
-        <div class="col-md-6 col-xs-12">
-      <div class="panel panel-default">
-        <div class="panel-body">Om ta7seen makes very delicious food, her shakriyah was amazing!</div>
-        <div class="panel-footer">Ali Al Ali</div>
-      </div>
-    </div>
-
-        <div class="col-md-6 col-xs-12">
-      <div class="panel panel-default">
-        <div class="panel-body">Om ta7seen makes very delicious food, her shakriyah was amazing!</div>
-        <div class="panel-footer">Ali Al Ali</div>
-      </div>
-    </div>
-
-        <div class="col-md-6 col-xs-12">
-      <div class="panel panel-default">
-        <div class="panel-body">Om ta7seen makes very delicious food, her shakriyah was amazing!</div>
-        <div class="panel-footer">Ali Al Ali</div>
-      </div>
-    </div>
-
-        <div class="col-md-6 col-xs-12">
-      <div class="panel panel-default">
-        <div class="panel-body">Om ta7seen makes very delicious food, her shakriyah was amazing!</div>
-        <div class="panel-footer">Ali Al Ali</div>
+        <div class="panel-body">{{ comment.HTMLBody }}</div>
+        <div class="panel-footer">{{ comment.UserName }}</div>
       </div>
     </div>
 
