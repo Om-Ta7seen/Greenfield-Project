@@ -1,18 +1,19 @@
 var Sequelize = require('sequelize');
 var sequelize = require('../db/dbconnection.js');
 
-exports.getAllCookerComments = function (callback) {
+exports.getAllCookerComments = function (UserName,callback) {
     var Query = 'select  Comments.ID as CommentsID, InsertedUser.ID as InsertUserID , Cooker.ID as CookerID \
-                 ,  InsertedUser.FullName  as InsertedUserFullName, InsertedUser.ImgUrl as InsertedUserImg \
-                 ,  Cooker.FullName  as CookerFullName, Cooker.ImgUrl as CookerImgUrl \
-                 ,Comments.HTMLBody as ComBody \
-                 ,Cooker.Address as CookerAddress \
-                 ,InsertedUser.Address as InsertedUserAddress \
-                 from Comments \
-                 join Users as InsertedUser On InsertedUser.ID = Comments.InsertUserID \
-                 Join Users as Cooker on Cooker.ID = Comments.CookerID '
-    sequelize.query(Query, { type: Sequelize.QueryTypes.SELECT })
-        .then(callback)
+                ,  InsertedUser.FullName  as InsertedUserFullName, InsertedUser.ImgUrl as InsertedUserImg \
+                ,  Cooker.FullName  as CookerFullName, Cooker.ImgUrl as CookerImgUrl \
+                ,Comments.HTMLBody as ComBody \
+                ,Cooker.Address as CookerAddress \
+                ,InsertedUser.Address as InsertedUserAddress \
+                from Comments \
+                join Users as InsertedUser On InsertedUser.ID = Comments.InsertUserID \
+                Join Users as Cooker on Cooker.ID = Comments.CookerID  \
+                where Cooker.UserName = :UserName'
+    sequelize.query(Query, { replacements:{UserName:UserName}, type: Sequelize.QueryTypes.SELECT })
+    .then(callback)
 }
 
 
