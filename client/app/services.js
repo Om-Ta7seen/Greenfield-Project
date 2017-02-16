@@ -67,10 +67,10 @@ angular.module('otbo5ly.services', [])
       });
     },
 
-    addCookerSchedule : function(username){
+    getCookingNames : function(){
       return $http({
-        method: 'POST',
-        url: '/api/schedule/' + username,
+        method: 'GET',
+        url: '/api/cookingNames',
         })
         .then(function (resp) {
           console.log(resp.data);
