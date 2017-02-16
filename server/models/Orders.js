@@ -16,7 +16,7 @@ exports.getOrderByID = function (ID, callback) {
 exports.addOrder = function (orderObj, callback) {
     var Query = 'insert into Orders (CookerID,UserID,DeliveryDate,DeliverTime) \
                  values (:CookerID,:UserID,:DeliveryDate,:DeliverTime)';
-    sequelize.query(Query, { replacements: { CookerID: orderObj.CookerID, UserID: CookerID.UserID, DeliveryDate: orderObj.DeliveryDate, DeliverTime: orderObj.DeliverTime }, type: Sequelize.QueryTypes.INSERT })
+    sequelize.query(Query, { replacements: { CookerID: orderObj.cookerID, UserID: orderObj.userID, DeliveryDate: orderObj.deliveryDate, DeliverTime: orderObj.deliveryTime }, type: Sequelize.QueryTypes.INSERT })
         .then(callback)
 }
 
