@@ -2,58 +2,51 @@ var jwt = require('jwt-simple');
 var Orders = require('./models/Orders.js');
 var Users = require('./models/Users.js')
 var CookerSchedule = require('./models/CookerSchedule.js')
+var CookNames = require('./models/CookNames.js')
 
 module.exports = {
 	signin: function(req, res){
-		var username = req.body.UserName;
-		var password = req.body.Password;
+		var username = req.body.username;
+		var password = req.body.password;
 
-		Users.getUserByUsername(username, function(err, user){
-			if(err){
-				res.status(500).send(err);
+		Users.getUserByUsername(username, function(user){
+			console.log(user)
+			if(password === user[0].Password){
+				var token = jwt.encode(user[0], 'secret');
+				res.json({token: token});
 			}
 			else{
-				if(password === user.Password){
-					var token = jwt.encode(user, 'secret');
-					res.json({token: token});
-				}
-				else{
-					console.log('Wrong username Or password')
-				}
+				console.log('Wrong username Or password')
+				res.status(500).json('Wrong username Or password')
 			}
 		})
-
 	},
 	signup: function(req, res){
 		//check
 		var user = req.body;
 		var days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 		var cookerID;
-		Users.getUserByUsername(user.UserName, function(user){
-			if(user){
+		Users.getUserByUsername(user.username, function(found){
+			if(found.length>0){
 				console.log("this user already exist!!")
 			}
 			else{
-				Users.addUser(user, function(err, newUser){
-					if(err){
-						res.status(500).send(err);
+				Users.addUser(user, function(newUser){
+					
+					console.log('hhhhhhhhhhhhhhhhhhh', newUser)
+					//insertin the cooker schedule 
+					for (var i = 0; i < days.length; i++) {
+						var obj = {}
+						obj.day = days[i];
+						obj.cookerID = newUser;
+						obj.price = user.schedule[i].price;
+						obj.cookID = user.schedule[i].cookID;
+						CookerSchedule.addSchedule(obj);
 					}
-					else{
-						cookerID = newUser.ID;
-						//insertin the cooker schedule 
-						for (var i = 0; i < days.length; i++) {
-							var obj = {}
-							obj.DayName = days[i];
-							obj.CookerID = cookerID;
-							obj.Price = req.schedule[i].Price;
-							obj.CookNamesID = req.schedule[i].CookNamesID;
-							CookerSchedule.addSchedule(obj);
-						}
 
-						//make surrrrrre of then
-						var token = jwt.encode(newUser, 'secret');
-						res.json({token: token});
-					}
+					//make surrrrrre of then
+					var token = jwt.encode(newUser, 'secret');
+					res.json({token: token});
 				});
 
 	
@@ -64,40 +57,48 @@ module.exports = {
 	getCookerProfile: function(req, res){
 		//chekkk
 		var username = req.params.username;
-		var profile;
-		Users.getUserProfileInfo(username, function(err, user){
-			if(err){
-				res.status(500).send(err);
-			}
-			else{
-				Object.assign(profile,user);
-			}
-		})
-		
-		CookerSchedule.getCookerSchedule(username, function(schedule){
-			if(schedule){
-				Object.assign(profile,schedule);
-			}
-		})
+		var profile = {};
+		Users.getUserProfileInfo(username, function(user){
+			Object.assign(profile,user[0]);
+			CookerSchedule.getCookerSchedule(username, function(schedule){
+				if(schedule){
+					Object.assign(profile,{schedule:schedule});
+				}
+				CookerSchedule.getCookerTodayCook(username, function(cook){
+					if(cook.length>0){
+						Object.assign(profile,{todayCook:cook[0]});
+					}
+					else{
+						Object.assign(profile,{todayCook:''});
+					}
+					res.json(profile)
+				})
+			})	
 
-		CookerSchedule.getCookerTodayCook(username, function(cook){
-			if(cook){
-				Object.assign(profile,cook);
-				res.json(profile)
-			}
 		})
-
 	},
 
 	addOrder: function(req, res){
 		var order = req.body;
-		Orders.addOrder(order, function(err, order){
-			if(err){
-				res.status(500).send(err);
-			}
-			else{
-				res.json(order); 
-			}
+		Orders.addOrder(order, function(order){
+			res.json('Order Added'); 
+		})
+	},
+
+	getTopCookers: function(req, res){
+
+
+	},
+
+	getCookingNames: function(req, res){
+		CookNames.getAll(function(cooks){
+			res.json(cooks)
+		})
+	}, 
+
+	getTodayCookings: function(req, res){
+		CookerSchedule.getAllCookByDayNameOrderdByPrice(function(result){
+			res.json(result)
 		})
 	}
 

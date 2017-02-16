@@ -19,6 +19,8 @@ app.post('/api/users/signup', handlers.signup);
 app.post('/api/orders', handlers.addOrder);
 
 app.get('/api/users/:username', handlers.getCookerProfile)
+app.get('/api/cookingNames', handlers.getCookingNames)
+app.get('/api/todayCookings', handlers.getTodayCookings)
 
 app.listen(port, function(){
 	console.log('App is listening to port', port)

@@ -103,11 +103,12 @@ exports.getAllCookByDayNameOrderByOrders = function (callback) {
 
 
 exports.addSchedule = function (ScheduleObj, callback) {
-    var Query = 'insert into CookerSchedule (DayName, CookNamesID, CookerID, ImgUrl) \
-                  values (:DayName, :CookNamesID, :CookerID, :ImgUrl)'
-    sequelize.query(Query, { replacements: { DayName: ScheduleObj.DayName, CookNamesID: ScheduleObj.CookNamesID, CookerID: ScheduleObj.CookerID, ImgUrl: ScheduleObj.ImgUrl }, type: Sequelize.QueryTypes.INSERT })
+    var Query = 'insert into CookerSchedule (DayName, CookNamesID, CookerID, ImgUrl, Price) \
+                  values (:DayName, :CookNamesID, :CookerID, :ImgUrl, :Price)'
+    sequelize.query(Query, { replacements: { DayName: ScheduleObj.day, CookNamesID: ScheduleObj.cookID, CookerID: ScheduleObj.cookerID, ImgUrl: ScheduleObj.imgUrl, Price: ScheduleObj.price }, type: Sequelize.QueryTypes.INSERT })
         .then(callback)
 }
+
 
 
 
