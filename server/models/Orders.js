@@ -6,6 +6,22 @@ exports.getAll = function (callback) {
         .then(callback)
 }
 
+exports.getOrdersByUserName = function (UserName, callback) {
+	var Query = 'select Cooker.ID as CookerID,CLient.ID as ClientID \
+				 ,Cooker.FullName as CookerFullName\
+				 ,CLient.FullName as CLientFullName \
+				 ,CookNames.Name \
+				 ,Orders.DeliveryDate \
+				 ,Orders.DeliverTime \
+				 from Orders \
+				 join Users as Cooker on Cooker.ID = Orders.CookerID \
+				 join CookNames on CookNames.ID = Orders.CookNamesID \
+				 join Users as CLient on CLient.ID = Orders.UserID \
+				 where Cooker.UserName = :UserName '
+    sequelize.query(Query, { replacements: { UserName: UserName }, type: Sequelize.QueryTypes.SELECT })
+        .then(callback)
+}
+
 
 exports.getOrderByID = function (ID, callback) {
     sequelize.query("select * from Orders where ID = :ID", { replacements: { ID: ID }, type: Sequelize.QueryTypes.SELECT })

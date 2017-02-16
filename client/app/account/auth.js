@@ -1,55 +1,49 @@
 angular.module('otbo5ly.auth', [])
 
-.controller('AuthController', function ($scope, $window, $location, Auth) {
+.controller('AuthController', function ($scope, $window, $location, $rootScope, Auth) {
   $scope.user = {};
 
   $scope.signin = function () {
-    var passFlag = checkPassword($scope.user.password);
-    var userFlag = checkUserName($scope.user.username);
-    if(userFlag && passFlag){
       Auth.signin($scope.user)
-        .then(function (token) {
-          console.log(token)
-          $window.localStorage.setItem('com.otbo5ly', token);
-          $window.localStorage.setItem('user.otbo5ly', $scope.user.username);
-          $location.path('/profile');
+        .then(function (data) {
+
+          $window.localStorage.setItem('com.otbo5ly', data.token);
+
+          // $window.localStorage.setItem('user.otbo5ly', {ID:data.user.ID, 
+          //   UserName: data.user.UserName, UserType: data.user.UserType});
+
+          // if(data.user.UserType === 'cooker'){
+          //   $rootScope.isCooker = true;
+          // }
+
+          // $rootScope.isLoggedIn = true;
+
+          // $location.path('/users/'+ data.user.UserName );
+          $location.path('/');
         })
         .catch(function (error) {
           console.log(error);
         });
-    } else {
-      if(!userFlag && !passFlag){
-        $scope.msg = "Wrong input for user and Password \n * username should have only numbers and letters \n * Password should be at least 6 characters long and have atleast 1 symbol and 1 number"
-      } else if(!userFlag){
-        $scope.msg = "* Username should have only numbers and letters"
-      } else if (!passFlag){
-        $scope.msg = "* Password should be at least 6 characters long and have atleast 1 symbol and 1 number"
-      }
-    }
   };
 
   $scope.signup = function () {
-    var passFlag = checkPassword($scope.user.password);
-    var userFlag = checkUserName($scope.user.username);
-    if(userFlag && passFlag){
       Auth.signup($scope.user)
-        .then(function (token) {
-          $window.localStorage.setItem('com.otbo5ly', token);
-          $window.localStorage.setItem('user.otbo5ly', $scope.user.username);
-          $location.path('/profile');
+        .then(function (data) {
+          $window.localStorage.setItem('com.otbo5ly', data.token);
+
+          $window.localStorage.setItem('user.otbo5ly', {ID:data.user.ID, 
+            UserName: data.user.UserName, UserType: data.user.UserType});
+
+          if(data.user.UserType === 'cooker'){
+            $rootScope.isCooker = true;
+          }
+          $rootScope.isLoggedIn = true;
+
+          $location.path('/users'+ data.user.UserName );
         })
         .catch(function (error) {
           console.error(error);
         });
-    } else {
-      if(!userFlag && !passFlag){
-        $scope.msg = "Wrong input for user and Password \n * username should have only numbers and letters \n * Password should be at least 6 characters long and have atleast 1 symbol and 1 number"
-      } else if(!userFlag){
-        $scope.msg = "* Username should have only numbers and letters"
-      } else if (!passFlag){
-        $scope.msg = "* Password should be at least 6 characters long and have atleast 1 symbol and 1 number"
-      }
-    }
   };
 
   $scope.signout = function(){

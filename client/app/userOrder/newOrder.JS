@@ -5,7 +5,7 @@ angular.module('otbo5ly.newOrder', [])
 
 	Users.addNewOrder($scope.data).then(function(resp){
 		console.log(resp)
-		alert(your order has been sent successfully)
+		alert('your order has been sent successfully')
 	})
 });
 

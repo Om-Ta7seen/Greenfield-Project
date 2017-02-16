@@ -82,6 +82,13 @@ module.exports = {
 		})
 	},
 
+	getCookerOrders: function(req, res){
+		var username = req.params.username;
+		Orders.getOrdersByUserName(username, function(orders){
+			res.json(orders);
+		})
+	},
+
 	addOrder: function(req, res){
 		var order = req.body;
 		Orders.addOrder(order, function(order){
