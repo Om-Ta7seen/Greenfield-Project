@@ -14,7 +14,7 @@ exports.getUserByID = function (ID, callback) {
 
 
 exports.getUserProfileInfo = function (username, callback) {
-    sequelize.query("select ID,Fullname,Email,PhoneNumber,ImgUrl,Address,UserName from Users where UserName = :UserName", { replacements: { UserName: username }, type: Sequelize.QueryTypes.SELECT })
+    sequelize.query("select ID,Fullname,Email,PhoneNumber,ImgUrl,Address,UserName,UserTypeName from Users where UserName = :UserName", { replacements: { UserName: username }, type: Sequelize.QueryTypes.SELECT })
         .then(callback)
 }
 

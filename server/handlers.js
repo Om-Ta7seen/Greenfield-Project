@@ -2,7 +2,8 @@ var jwt = require('jwt-simple');
 var Orders = require('./models/Orders.js');
 var Users = require('./models/Users.js')
 var CookerSchedule = require('./models/CookerSchedule.js')
-var CookNames = require('./models/CookNames.js')
+var CookNames = require('./models/CookNames.js');
+var Comments = require('./models/Comments.js')
 
 module.exports = {
 	signin: function(req, res){
@@ -32,7 +33,6 @@ module.exports = {
 			}
 			else{
 				Users.addUser(user, function(newUser){
-					
 					console.log('hhhhhhhhhhhhhhhhhhh', newUser)
 					//insertin the cooker schedule 
 					for (var i = 0; i < days.length; i++) {
@@ -55,7 +55,6 @@ module.exports = {
 	},
 
 	getCookerProfile: function(req, res){
-		//chekkk
 		var username = req.params.username;
 		var profile = {};
 		Users.getUserProfileInfo(username, function(user){
@@ -71,10 +70,15 @@ module.exports = {
 					else{
 						Object.assign(profile,{todayCook:''});
 					}
-					res.json(profile)
+					Comments.getAllCookerComments(username, function(comments){
+						console.log(comments)
+						if(comments){
+							Object.assign(profile,{comments:comments});
+						}
+						res.json(profile)
+					})
 				})
 			})	
-
 		})
 	},
 
