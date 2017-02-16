@@ -1,52 +1,96 @@
-<div id="signup" class="container">
-  <br><br><br>
-  <h1><strong>Signup</strong></h1>
-  <form ng-submit="signup()">
-    <div class="form-group">
-      <label for="user">Full Name:</label>
-      <input ng-model="user.FullName" 
-      type="text" class="form-control" placeholder="your first and last name">
+<style>
+
+  .Days {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+  }
+
+  .float {
+    float: left;
+  }
+  .Days {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+  }
+
+  .Days :hover {
+    background-color: #111111;
+  }
+  .Days {
+    font-size: 17px;
+    color: #DC143C;
+  }
+</style>
+<body>
+  <div id="signup" class="container">
+    <br><br><br>
+    <h1><strong>Signup</strong></h1>
+    <form ng-submit="signup()">
+      <div class="form-group">
+        <label for="user">Full Name:</label>
+        <input ng-model="user.fullname" 
+        type="text" class="form-control" placeholder="your first and last name">
+      </div>
+      <div class="form-group">
+        <label for="user">User Name:</label>
+        <input ng-model="user.username" 
+        type="text" class="form-control" placeholder="your name">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Password:</label>
+        <input ng-model="user.password" 
+        type="password" class="form-control" placeholder="your assword">
+      </div>
+      <div class="form-group">
+        <label for = "phone">Phone Number:</label>
+        <input ng-model="user.phone" 
+        type="Number" class="form-control" placeholder="your number">
+      </div>
+      <div class="form-group">
+        <label for="user">Email address:</label>
+        <input ng-model="user.email" 
+        type="text" class="form-control" placeholder="your email">
+      </div>
+      <div class="form-group">
+        <label for="user">Address:</label>
+        <input ng-model="user.address" 
+        type="text" class="form-control" placeholder="your address">
+      </div>
+      <h3><strong>Are You Cooker ?! </strong></h3>
+      <input type="radio" name="userType" ng-model="myCooker"> Yub, I am Cooker
+      <br>
+      <input type="radio" name="userType"> Nope, I am Just a User
+      <br><br>
+      <div ng-show="myCooker">
+        <h3><strong>Insert Your Cooking Schedule Here</strong></h3>
+        <dl class="Days">
+          <dd><strong>-Saturday: </strong></dd>
+          <div class="dropdown" class="float">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li ng-repeat="" ng-model="">{{}}</li>
+              </ul>
+            </div>
+            <dd><strong>-Sunday: </strong></dd>
+            <dd><strong>-Monday: </strong></dd>
+            <dd><strong>-Tuesday: </strong></dd>
+            <dd><strong>-Wednesday: </strong></dd>
+            <dd><strong>-Thursday: </strong></dd>
+            <dd><strong>-Friday: </strong></dd>
+          </dl>
+        </div>
+        <input type="submit" class="btn btn-info" value="Submit">
+      </form>
+      <br>
+      <h4><strong>Do you have account already?</strong></h4>
+      <a href="#/signin">
+        <input type="submit" class="btn btn-danger" value="Signin">
+      </a>
     </div>
-    <div class="form-group">
-      <label for="user">User Name:</label>
-      <input ng-model="user.UserName" 
-      type="text" class="form-control" placeholder="your name">
-    </div>
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input ng-model="user.Password" 
-      type="password" class="form-control" placeholder="your assword">
-    </div>
-    <div class="form-group">
-      <label for = "phone">Phone Number:</label>
-      <input ng-model="user.PhoneNumber" 
-      type="Number" class="form-control" placeholder="your number">
-    </div>
-    <div class="form-group">
-      <label for="user">Email address:</label>
-      <input ng-model="user.Email" 
-      type="text" class="form-control" placeholder="your email">
-    </div>
-    <div class="form-group">
-      <label for="user">Address:</label>
-      <input ng-model="user.Address" 
-      type="text" class="form-control" placeholder="your address">
-    </div>
-    Are You Cooker ?! <input type="checkbox" ng-model="myCooker"> Yub, I am Cooker
-    <input type="checkbox"> Nope, I am Just a User
-    <br><br>
-    <div ng-show="myCooker">
-    <h3 ><strong>Insert Your Schedule</strong></h3>
-    <ul><li></li></ul>
-    <ul>
-      <li ng-repeat="cooking in data.cookings">{{cooking.title}}</li>
-    </ul>
-    </div>
-    <input type="submit" class="btn btn-info" value="Submit">
-  </form>
-  <br>
-  <h4><strong>Do you have account already?</strong></h4>
-  <a href="#/signin">
-    <input type="submit" class="btn btn-danger" value="Signin">
-  </a>
-</div>
