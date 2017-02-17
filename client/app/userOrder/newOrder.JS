@@ -26,7 +26,7 @@ angular.module('otbo5ly.newOrder', [])
 				alert('Something went wrong try again');
 			} else {
 				alert('your order has been sent successfully')
-				location.path('/');
+				$location.path('/');
 			}
 		})
 	}
