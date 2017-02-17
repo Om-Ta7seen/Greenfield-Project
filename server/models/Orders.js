@@ -30,9 +30,9 @@ exports.getOrderByID = function (ID, callback) {
 
 
 exports.addOrder = function (orderObj, callback) {
-    var Query = 'insert into Orders (CookerID,UserID,DeliveryDate,DeliverTime) \
-                 values (:CookerID,:UserID,:DeliveryDate,:DeliverTime)';
-    sequelize.query(Query, { replacements: { CookerID: orderObj.cookerID, UserID: orderObj.userID, DeliveryDate: orderObj.deliveryDate, DeliverTime: orderObj.deliveryTime }, type: Sequelize.QueryTypes.INSERT })
+    var Query = 'insert into Orders (CookerID,UserID,DeliveryDate,DeliverTime, CookNamesID) \
+                 values (:CookerID,:UserID,:DeliveryDate,:DeliverTime, :CookNamesID)';
+    sequelize.query(Query, { replacements: { CookerID: orderObj.cookerID, UserID: orderObj.userID, DeliveryDate: orderObj.deliveryDate, DeliverTime: orderObj.deliveryTime, CookNamesID: orderObj.cookNameID }, type: Sequelize.QueryTypes.INSERT })
         .then(callback)
 }
 

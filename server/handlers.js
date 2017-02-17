@@ -1,9 +1,10 @@
 var jwt = require('jwt-simple');
 var Orders = require('./models/Orders.js');
-var Users = require('./models/Users.js')
-var CookerSchedule = require('./models/CookerSchedule.js')
+var Users = require('./models/Users.js');
+var CookerSchedule = require('./models/CookerSchedule.js');
 var CookNames = require('./models/CookNames.js');
-var Comments = require('./models/Comments.js')
+var Comments = require('./models/Comments.js');
+var OrderDetails = require('./models/OrderDetails.js')
 
 module.exports = {
 	signin: function(req, res){
@@ -98,6 +99,7 @@ module.exports = {
 		Orders.addOrder(order, function(order){
 			res.json('Order Added'); 
 		})
+		
 	},
 
 	getCookingNames: function(req, res){
