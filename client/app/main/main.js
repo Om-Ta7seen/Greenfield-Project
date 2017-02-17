@@ -12,7 +12,7 @@ angular.module('otbo5ly.main', [])
   	// });
 
   	$scope.setOrder = function(UserID, cookerID, cookNameID, FullName, cookName){
-		OrderService.setOrder({UserID: UserID, cookerID : cookerID,
+		OrderService.setOrder({userID: UserID, cookerID : cookerID,
 			 cookNameID: cookNameID, FullName : FullName, cookName: cookName});
 	}
 

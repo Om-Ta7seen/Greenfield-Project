@@ -35,10 +35,10 @@ padding-top: 100px;
 
 </div>
 
-<div class="col-xs-12" style="margin-top: 50px;">  
+<div class="col-xs-12" style="margin-top: 50px;" ng-if="data.todayCook !== ''">  
   <span style="padding: 20px;font-size: 1.7em;color: #fff;"><b>{{ data.FullName }}</b> cooking for today is : <b>{{ data.todayCook.Name }}</b>, just for 
   <b>{{ data.todayCook.Price }}</b> JOD!</span>
-  <button ng-click="setOrder($root.UserID, cooking.ID, cooking.cookNameID, cooking.FullName, cooking.Name)" class="btn btn-lg btn-primary">Order now</button>
+  <button ng-click="setOrder($root.UserID, cooking.ID, 1, cooking.FullName, cooking.Name)" class="btn btn-lg btn-primary">Order now</button>
 </div>
 
 </div>
@@ -72,7 +72,7 @@ padding-top: 100px;
 </div>
 <div class="row">
   <div class="page-header text-center">
-    <h1>User reviews <small> for {{ data.user.FullName }}</small></h1>
+    <h1>User reviews <small> for {{ data.FullName }}</small></h1>
   </div>
 </div>
 <div class="row">
