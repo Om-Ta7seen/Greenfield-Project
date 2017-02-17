@@ -11,7 +11,7 @@ angular.module('otbo5ly.auth', [])
   $scope.signin = function () {
       Auth.signin($scope.user)
         .then(function (data) {
-          console.log(data)
+          //console.log(data)
 
           if(data.status === '500'){
             $scope.msg = 'Wrong password or username!'
@@ -21,8 +21,10 @@ angular.module('otbo5ly.auth', [])
 
             $window.localStorage.setItem('com.otbo5ly', data.token);
 
-            $window.localStorage.setItem('user.otbo5ly', {ID:data.ID, 
-              UserName: data.UserName, UserTypeName: data.UserTypeName});
+            var userData = {ID:data.ID, 
+              UserName: data.UserName, UserTypeName: data.UserTypeName};
+ 
+            $window.localStorage.setItem('user.otbo5ly', JSON.stringify(userData));
 
             $rootScope.isLoggedIn = true;
             $rootScope.UserName = data.UserName;
@@ -52,9 +54,9 @@ angular.module('otbo5ly.auth', [])
       }
       Auth.signup($scope.user)
         .then(function (data) {
-          console.log(data)
+          //console.log(data)
 
-          if(data.status === '500'){
+         if(data.status === '500'){
             $scope.msg = 'Wrong password or username!'
           } else {
 
@@ -62,13 +64,15 @@ angular.module('otbo5ly.auth', [])
 
             $window.localStorage.setItem('com.otbo5ly', data.token);
 
-            $window.localStorage.setItem('user.otbo5ly', {ID:data.ID, 
-              UserName: data.UserName, UserTypeName: data.UserTypeName});
+            var userData = {ID:data.ID, 
+              UserName: data.UserName, UserTypeName: data.UserTypeName};
+ 
+            $window.localStorage.setItem('user.otbo5ly', JSON.stringify(userData));
 
             $rootScope.isLoggedIn = true;
             $rootScope.UserName = data.UserName;
             $rootScope.UserID = data.ID;
-            
+
             if(data.UserTypeName === 'cooker'){
               $rootScope.isCooker = true;
               $location.path('/users/'+ data.UserName );
@@ -77,8 +81,7 @@ angular.module('otbo5ly.auth', [])
             }
             
           }
-
-
+          
         })
         .catch(function (error) {
           console.error(error);

@@ -139,11 +139,16 @@ angular.module('otbo5ly.services', [])
 })
 
 
-.factory('OrderService', function(){
+.factory('OrderService', function($window, $location){
   var order = {};
   return {
     setOrder : function(newOrder){
-      order = newOrder;
+      if($window.localStorage.getItem('com.otbo5ly')){
+        order = newOrder;
+        $location.path('/order/add');
+      } else {
+        $location.path('/signin');
+      }
     },
     getOrder : function(){
       return order;

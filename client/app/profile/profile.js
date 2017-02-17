@@ -8,12 +8,8 @@ angular.module('otbo5ly.profile', [])
 	});
 
   	$scope.setOrder = function(UserID, cookerID, cookNameID){
-  		if($window.localStorage.getItem('com.otbo5ly')){
-			OrderService.setOrder({UserID: UserID, cookerID : cookerID,
+		OrderService.setOrder({UserID: UserID, cookerID : cookerID,
 			 cookNameID: cookNameID});
-  		} else {
-  			$location.path('/signin');
-  		}
 	}
 
 });

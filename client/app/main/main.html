@@ -48,7 +48,7 @@ padding-top: 100px;
   </div>
   
   <ul class="list-group">
-    <li class="list-group-item" ng-repeat="cooker in data.cookers">{{ cooker.username }}</li>
+    <li class="list-group-item" ng-repeat="cooker in data.cookings"><a href="#/users/{{ cooker.UserName }}"> {{ cooker.FullName }}</a></li>
   </ul>
 
   </div>
@@ -75,7 +75,7 @@ padding-top: 100px;
              <h3>{{ cooking.Name }}</h3>
              <p><a href="#/users/{{ cooking.UserName }}">{{ cooking.FullName }}</a></p>
              <p class="btn btn-info" style="margin-bottom: 20px">{{ cooking.Price }} JOD</p>
-             <p><a ng-click="setOrder($root.userID, cooking.ID, cooking.Name)" class="btn btn-primary" role="button">Order Now</a> </p>
+             <p><a ng-click="setOrder($root.UserID, cooking.ID, cooking.cookNameID, cooking.FullName, cooking.Name)" class="btn btn-primary" role="button">Order Now</a> </p>
               </div>
             </div>
           </div>

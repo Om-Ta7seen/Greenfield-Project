@@ -1,29 +1,31 @@
 angular.module('otbo5ly.newOrder', [])
 
-.controller('NewOrderController', function ($scope, Users, Auth) {
-	$scope.data = {};
+.controller('NewOrderController', function ($scope, $location, Users, Auth, OrderService) {
+	
+	$scope.order = {};
 
-	Users.addNewOrder($scope.data).then(function(resp){
-		console.log(resp)
-		alert('your order has been sent successfully')
-	})
+	if(!OrderService.getOrder().UserID){
+		alert('you should choose what to order first!');
+		$location.path('/');
+	} else {
+		Object.assign($scope.order, OrderService.getOrder());
+		console.log($scope.order);
+	}
+
+	var getDeliveryDate = function(){
+		var todayDate = new Date();
+		todayDate.setDate(todayDate.getDate() + 1);
+		return todayDate;
+	}
+
+	$scope.order.deliveryDate = getDeliveryDate().toISOString().slice(0,10);
+
+	$scope.addOrder = function(){
+		Users.addNewOrder($scope.order).then(function(resp){
+			console.log(resp)
+			alert('your order has been sent successfully')
+			location.path('/');
+		})
+	}
 	
 });
-
-
-
-
-
-
-// angular.module('otbo5ly.newOrder', [])
-
-// .controller('NewOrderController', function ($scope, Users, Auth) {
-// 	$scope.data = {};
-
-// 	$scope.submit = function () {
-// 		Users.addNewOrder($scope.data).then(function(resp){
-// 			console.log(resp)
-// 			alert(your order has been sent successfully)
-// 		})
-// 	}
-// });
