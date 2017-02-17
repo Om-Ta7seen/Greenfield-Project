@@ -85,7 +85,7 @@ angular.module('otbo5ly.services', [])
 
   }
 })
-.factory('Auth', function ($http, $location, $window) {
+.factory('Auth', function ($http, $location, $window, $rootScope) {
   // Don't touch this Auth service!!!
   // it is responsible for authenticating our user
   // by exchanging the user's username and password
@@ -100,7 +100,7 @@ angular.module('otbo5ly.services', [])
       data: user
     })
     .then(function (resp) {
-      return resp.data.token;
+      return resp.data;
     });
   };          
 
@@ -111,7 +111,7 @@ angular.module('otbo5ly.services', [])
       data: user
     })
     .then(function (resp) {
-      return resp.data.token;
+      return resp.data;
     });
   };
 
@@ -122,6 +122,8 @@ angular.module('otbo5ly.services', [])
   var signout = function () {
     $window.localStorage.removeItem('com.otbo5ly');
     $window.localStorage.removeItem('user.otbo5ly');
+    $rootScope.isLoggedIn = false;
+    $rootScope.isCooker = false;
     $location.path('/signin');
   };
 

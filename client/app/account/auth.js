@@ -1,6 +1,6 @@
 angular.module('otbo5ly.auth', [])
 
-.controller('AuthController', function ($scope, $window, $location, Auth, Users) {
+.controller('AuthController', function ($scope, $window, $location, $rootScope, Auth, Users) {
   $scope.user = {};
 
   Users.getCookingNames().then(function(data){
@@ -11,20 +11,22 @@ angular.module('otbo5ly.auth', [])
   $scope.signin = function () {
       Auth.signin($scope.user)
         .then(function (data) {
-
+          console.log(data)
           $window.localStorage.setItem('com.otbo5ly', data.token);
 
-          // $window.localStorage.setItem('user.otbo5ly', {ID:data.user.ID, 
-          //   UserName: data.user.UserName, UserType: data.user.UserType});
+          $window.localStorage.setItem('user.otbo5ly', {ID:data.ID, 
+            UserName: data.UserName, UserTypeName: data.UserTypeName});
 
-          // if(data.user.UserType === 'cooker'){
-          //   $rootScope.isCooker = true;
-          // }
+          $rootScope.isLoggedIn = true;
 
-          // $rootScope.isLoggedIn = true;
+          if(data.UserTypeName === 'cooker'){
+            $rootScope.isCooker = true;
+            $location.path('/users/'+ data.UserName );
+          } else {
+            $location.path('/');
+          }
 
-          // $location.path('/users/'+ data.user.UserName );
-          $location.path('/');
+
         })
         .catch(function (error) {
           console.log(error);
