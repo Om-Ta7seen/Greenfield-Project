@@ -22,4 +22,5 @@ sequelize
         console.log('Unable to connect :', err);
     });
 
+
 module.exports = sequelize;
