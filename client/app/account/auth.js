@@ -48,9 +48,9 @@ angular.module('otbo5ly.auth', [])
 
   $scope.signup = function () {
       if($scope.isCooker){
-        $scope.user.UserType = 'cooker';
+        $scope.user.userType = 'cooker';
       } else {
-        $scope.user.UserType = 'user';
+        $scope.user.userType = 'user';
       }
       Auth.signup($scope.user)
         .then(function (data) {
