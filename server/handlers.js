@@ -32,21 +32,27 @@ module.exports = {
 		var cookerID;
 		Users.getUserByUsername(user.username, function(found){
 			if(found.length>0){
-				new Error("this user already exist!!")
-				console.log("this user already exist!!")
+				res.json("this user already exist!!")
 			}
 			else{
-
-				console.log('hhhhhhhhhhhhhhhh')
+				if(user.imgUrl === undefined){
+					user.imgUrl = '/../client/assets/chef.png'
+				}
 				Users.addUser(user, function(newUser){
-					console.log('hhhhhhhhhhhhhhhhhhh', newUser)
 					//inserting the cooker schedule 
+					console.log(user.schedule)
 					for (var i = 0; i < days.length; i++) {
 						var obj = {}
 						obj.day = days[i];
 						obj.cookerID = newUser;
 						obj.price = user.schedule[i].price;
 						obj.cookID = user.schedule[i].cookID;
+						obj.imgUrl = '/assets/chef.png'
+						for(var k in obj){
+							if(obj[k] === undefined){
+								obj[k] = null;
+							}
+						}
 						CookerSchedule.addSchedule(obj);
 					}
 
