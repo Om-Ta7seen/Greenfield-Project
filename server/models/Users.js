@@ -36,7 +36,6 @@ exports.getUserByUsername = function (username, callback) {
 }
 
 
-
 exports.addUser = function (userObj, callback) {
     var Query = 'insert into Users (FullName,UserName,Email,PhoneNumber,UserTypeName,Password,ImgUrl,Address) \
                  values (:FullName,:UserName,:Email,:PhoneNumber,:UserTypeName,:Password,:ImgUrl,:Address)';
