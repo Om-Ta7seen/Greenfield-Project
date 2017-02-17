@@ -124,6 +124,8 @@ angular.module('otbo5ly.services', [])
     $window.localStorage.removeItem('user.otbo5ly');
     $rootScope.isLoggedIn = false;
     $rootScope.isCooker = false;
+    $rootScope.UserName = undefined;
+    $rootScope.UserID = undefined;
     $location.path('/signin');
   };
 
@@ -134,4 +136,20 @@ angular.module('otbo5ly.services', [])
     isAuth: isAuth,
     signout: signout
   };
+})
+
+
+.factory('OrderService', function(){
+  var order = {};
+  return {
+    setOrder : function(newOrder){
+      order = newOrder;
+    },
+    getOrder : function(){
+      return order;
+    },
+    clearOrder: function(){
+      order = {};
+    }
+  }
 });

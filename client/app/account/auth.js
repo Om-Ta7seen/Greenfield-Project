@@ -12,18 +12,29 @@ angular.module('otbo5ly.auth', [])
       Auth.signin($scope.user)
         .then(function (data) {
           console.log(data)
-          $window.localStorage.setItem('com.otbo5ly', data.token);
 
-          $window.localStorage.setItem('user.otbo5ly', {ID:data.ID, 
-            UserName: data.UserName, UserTypeName: data.UserTypeName});
-
-          $rootScope.isLoggedIn = true;
-
-          if(data.UserTypeName === 'cooker'){
-            $rootScope.isCooker = true;
-            $location.path('/users/'+ data.UserName );
+          if(data.status === '500'){
+            $scope.msg = 'Wrong password or username!'
           } else {
-            $location.path('/');
+
+            $scope.msg = '';
+
+            $window.localStorage.setItem('com.otbo5ly', data.token);
+
+            $window.localStorage.setItem('user.otbo5ly', {ID:data.ID, 
+              UserName: data.UserName, UserTypeName: data.UserTypeName});
+
+            $rootScope.isLoggedIn = true;
+            $rootScope.UserName = data.UserName;
+            $rootScope.UserID = data.ID;
+
+            if(data.UserTypeName === 'cooker'){
+              $rootScope.isCooker = true;
+              $location.path('/users/'+ data.UserName );
+            } else {
+              $location.path('/');
+            }
+            
           }
 
 
@@ -41,18 +52,33 @@ angular.module('otbo5ly.auth', [])
       }
       Auth.signup($scope.user)
         .then(function (data) {
-          // $window.localStorage.setItem('com.otbo5ly', data.token);
+          console.log(data)
 
-          // $window.localStorage.setItem('user.otbo5ly', {ID:data.user.ID, 
-          //   UserName: data.user.UserName, UserType: data.user.UserType});
+          if(data.status === '500'){
+            $scope.msg = 'Wrong password or username!'
+          } else {
 
-          // if(data.user.UserType === 'cooker'){
-          //   $rootScope.isCooker = true;
-          // }
-          // $rootScope.isLoggedIn = true;
+            $scope.msg = '';
 
-          // $location.path('/users'+ data.user.UserName );
-          $location.path('/');
+            $window.localStorage.setItem('com.otbo5ly', data.token);
+
+            $window.localStorage.setItem('user.otbo5ly', {ID:data.ID, 
+              UserName: data.UserName, UserTypeName: data.UserTypeName});
+
+            $rootScope.isLoggedIn = true;
+            $rootScope.UserName = data.UserName;
+            $rootScope.UserID = data.ID;
+            
+            if(data.UserTypeName === 'cooker'){
+              $rootScope.isCooker = true;
+              $location.path('/users/'+ data.UserName );
+            } else {
+              $location.path('/');
+            }
+            
+          }
+
+
         })
         .catch(function (error) {
           console.error(error);

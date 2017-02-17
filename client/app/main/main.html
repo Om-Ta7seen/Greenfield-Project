@@ -73,8 +73,9 @@ padding-top: 100px;
             <div class="col-md-8">
              <div class="caption" style="display: inline-block;height: 100%;">
              <h3>{{ cooking.Name }}</h3>
-             <p>{{ cooking.FullName }}</p>
-             <p><a href="/orders/{{ cooking.UserName }}/{{ cooking.Name }}" class="btn btn-primary" role="button">Order Now</a> </p>
+             <p><a href="#/users/{{ cooking.UserName }}">{{ cooking.FullName }}</a></p>
+             <p class="btn btn-info" style="margin-bottom: 20px">{{ cooking.Price }} JOD</p>
+             <p><a ng-click="setOrder($root.userID, cooking.ID, cooking.Name)" class="btn btn-primary" role="button">Order Now</a> </p>
               </div>
             </div>
           </div>

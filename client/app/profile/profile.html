@@ -10,8 +10,8 @@ padding-top: 100px;
 
   <div class="col-md-4 col-xs-12" style="color: #fff;margin-top: 20px;">
 
-  <img ng-if="data.ImgUrl === null" src="/assets/chef.png" class="img-responsive thumbnail" style="margin: auto;">
-  <img ng-if="data.ImgUrl !== null" src="/{{ data.ImgUrl }}" class="img-responsive thumbnail" style="margin: auto;">
+  <img ng-if="data.ImgUrl === ''" src="/assets/chef.png" class="img-responsive thumbnail" style="margin: auto;">
+  <img ng-if="data.ImgUrl !== ''" src="/{{ data.ImgUrl }}" class="img-responsive thumbnail" style="margin: auto;">
 
 </div>
 
@@ -38,7 +38,7 @@ padding-top: 100px;
 <div class="col-xs-12" style="margin-top: 50px;">  
   <span style="padding: 20px;font-size: 1.7em;color: #fff;"><b>{{ data.FullName }}</b> cooking for today is : <b>{{ data.todayCook.Name }}</b>, just for 
   <b>{{ data.todayCook.Price }}</b> JOD!</span>
-  <button href="#/orders/add/{{ data.user.UserName }}/{{ data.todayCook.ID }}/{{ userDetails.username }}" class="btn btn-lg btn-primary">Order now</button>
+  <button ng-click="setOrder($root.userID, cooking.ID, cooking.Name)" class="btn btn-lg btn-primary">Order now</button>
 </div>
 
 </div>
@@ -80,8 +80,8 @@ padding-top: 100px;
 
     <div class="col-md-6 col-xs-12" ng-repeat="comment in data.comments">
       <div class="panel panel-default">
-        <div class="panel-body">{{ comment.HTMLBody }}</div>
-        <div class="panel-footer">{{ comment.UserName }}</div>
+        <div class="panel-body">{{ comment.ComBody }}</div>
+        <div class="panel-footer">{{ comment.InsertedUserFullName }}</div>
       </div>
     </div>
 
