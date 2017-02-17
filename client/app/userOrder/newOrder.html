@@ -1,32 +1,41 @@
-<div id="orders" ng-model="order" ng-controller="NewOrderController" >
-	<h2><center><strong>Your Order Goes Here</strong></center></h2>
-	<h3><strong>When do you want to receive your order?!</strong></h3>
-	<form name="timeForm" ng-submit="">
-		<div>
-			<label for="time">Which hour?</label>
-			<input type='text' placeholder="time">
-		</div>
-		<br>
-		<div class = "btn-group" ng-submit="">
-			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Cook Name
-				<span class="caret"></span>
-			</button>
+<style>
+	.container {
+		background: url('Greenfield-Project/client/assets/inside-bg.jpg');
+		background-position: top;
+		min-height: 500px;
+		padding-top: 50px;
+	}
+
+</style>
+	<div class="container" ng-model="order" ng-controller="NewOrderController" ><center>
+		<h2 style="color: #FFC0CB	;"><strong>Your Order Goes Here</strong></h2>
+		<h4 style="color: #F0FFFF; padding: 20px; width: 400px; height: 150px; text-align: justify;">To order online, just select the cook item from the cook list and the cooker you prefer, then insert the hour at which you want to recieve your order, and don't forget to submit.Don't worry, We’ll send your order to the cooker.</h4>
+		<h3 style="color: #EEE8AA;"><strong>When do you want to receive your order?!</strong></h3>
+		<form name="timeForm" ng-submit="">
+			<div>
+				<h4 style="	color: #FFC0CB;"><strong>Which hour?</strong></h4>
+				<input type='text' placeholder="time" ng-model="">
+			</div>
+			<br>
+			<div class = "btn-group" ng-submit="">
+				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Cook Name
+					<span class="caret"></span>
+				</button>
 				<ul class="dropdown-menu">
 					<li ng-repeat="cooking in data.cookings ">{{cooking.title}}</li>
 				</ul>
-		</div>
-		<div class = "btn-group" ng-submit="">
-			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose The Cooker
-				<span class="caret"></span>
-			</button>
+			</div>
+			<div class = "btn-group" ng-submit="">
+				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose The Cooker
+					<span class="caret"></span>
+				</button>
 				<ul class="dropdown-menu">
 					<li ng-repeat="cooker in data.cookers">{{cooker.username}}</li>
 				</ul>
-		</div>
-		<input type="submit" class="btn btn-info" value="Submit" ng-click="submit()">
-	</form>
-<!-- 	<input type="text" name="" ng-model="user.cookName">enter your koof
+			</div>
+			<input type="submit" class="btn btn-info" value="Submit" ng-click="submit()">
+		</form>
+<!-- 	<input type="text" name="" ng-model="user.cookName">enter your cook
 	<button type="submit" ng-click="submit"> -->
-	</div>
-</body>
-</html>
+	</center>
+</div>

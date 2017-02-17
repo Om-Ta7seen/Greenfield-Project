@@ -7,6 +7,7 @@ angular.module('otbo5ly.newOrder', [])
 		console.log(resp)
 		alert('your order has been sent successfully')
 	})
+	
 });
 
 
