@@ -36,7 +36,7 @@ exports.getUserByUsername = function (username, callback) {
 }
 
 exports.getTopCookers = function (callback) {
-    var Query = 'select Users.ID,Users.FullName ,count(Orders.ID) as OrderNums,Users.Address \
+    var Query = 'select Users.ID,Users.FullName ,Users.UserName , count(Orders.ID) as OrderNums,Users.Address \
                  from CookerSchedule  \
                  join Users on Users.ID = CookerSchedule.CookerID  \
                  join CookNames on CookNames.ID = CookerSchedule.CookNamesID  \
