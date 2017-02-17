@@ -39,7 +39,8 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
         <ul class="nav navbar-nav">
-          <li ng-show="$root.isCooker"><a href="#/users/{{ $root.UserName }}">Cookers page</a></li>
+          <li ng-show="$root.isCooker"><a href="#/users/{{ $root.UserName }}">My Profile</a></li>
+          <li ng-show="$root.isCooker"><a href="#/orders/{{ $root.UserName }}">My Orders</a></li>
           <li ng-show="!$root.isLoggedIn"><a href="#/signin">Sign In</a></li>
           <li ng-show="!$root.isLoggedIn"><a href="#/signup">Sign Up</a></li>
           <li ng-show="$root.isLoggedIn"><a href="#/signout">Sign out</a></li>
