@@ -11,7 +11,6 @@ module.exports = {
 		var password = req.body.password;
 
 		Users.getUserByUsername(username, function(user){
-
 			if(user.length>0){
 				if(password === user[0].Password){
 					delete user[0]['Password'];
@@ -55,8 +54,6 @@ module.exports = {
 						}
 						CookerSchedule.addSchedule(obj);
 					}
-
-					//make surrrrrre of then
 					var token = jwt.encode(newUser, 'secret');
 					res.json({token: token});
 				})
