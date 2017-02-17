@@ -25,7 +25,7 @@ module.exports = {
 		})
 	},
 	signup: function(req, res){
-		//check
+		
 		var user = req.body;
 		var days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 		var cookerID;
@@ -37,13 +37,13 @@ module.exports = {
 				if(user.imgUrl === undefined){
 					user.imgUrl = '/../client/assets/chef.png'
 				}
-				Users.addUser(user, function(newUser){
+				Users.addUser(user, function(userID){
 					//inserting the cooker schedule 
 					console.log(user.schedule)
 					for (var i = 0; i < days.length; i++) {
 						var obj = {}
 						obj.day = days[i];
-						obj.cookerID = newUser;
+						obj.cookerID = userID;
 						obj.price = user.schedule[i].price;
 						obj.cookID = user.schedule[i].cookID;
 						obj.imgUrl = '/assets/chef.png'
@@ -54,8 +54,11 @@ module.exports = {
 						}
 						CookerSchedule.addSchedule(obj);
 					}
-					var token = jwt.encode(newUser, 'secret');
-					res.json({token: token});
+					Users.getUserByID(userID, function(user){
+						delete user[0]['Password'];
+						var token = jwt.encode(user[0], 'secret');
+						res.json(Object.assign(user[0], {token: token}));
+					})
 				})
 			}
 		})
