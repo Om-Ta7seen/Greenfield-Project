@@ -4,7 +4,6 @@ var Users = require('./models/Users.js');
 var CookerSchedule = require('./models/CookerSchedule.js');
 var CookNames = require('./models/CookNames.js');
 var Comments = require('./models/Comments.js');
-var OrderDetails = require('./models/OrderDetails.js')
 
 module.exports = {
 	signin: function(req, res){
@@ -99,14 +98,23 @@ module.exports = {
 		Orders.addOrder(order, function(order){
 			res.json('Order Added'); 
 		})
-		
 	},
 
 	getCookingNames: function(req, res){
 		CookNames.getAll(function(cooks){
-			res.json(cooks)
+			if(cooks){
+				res.json(cooks)	
+			}
 		})
 	}, 
+
+	getTopCookers: function(req, res){
+		Users.getTopCookers(function(cookers){
+			if(cookers){
+				res.json(cookers);
+			}
+		})
+	},
 
 	getTodayCookings: function(req, res){
 		CookerSchedule.getAllCookByDayNameOrderdByPrice(function(result){
