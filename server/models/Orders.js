@@ -10,7 +10,7 @@ exports.getOrdersByUserName = function (UserName, callback) {
 	var Query = 'select Cooker.ID as CookerID,CLient.ID as ClientID \
 				 ,Cooker.FullName as CookerFullName\
 				 ,CLient.FullName as CLientFullName \
-				 ,CookNames.Name \
+				 ,CookNames.Name, CookNames.ID as cookNameID \
 				 ,Orders.DeliveryDate \
 				 ,Orders.DeliverTime \
 				 from Orders \
