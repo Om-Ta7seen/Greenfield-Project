@@ -37,7 +37,7 @@ padding-top: 100px;
 </div>
 
 
-<div class="row" style="margin-top: 40px;">
+<div class="row" style="margin-top: 40px;" ng-controller="MainController">
 
 <div class="col-md-3 col-md-offset-1 col-xs-12">
 
@@ -67,13 +67,14 @@ padding-top: 100px;
         <li class="list-group-item" ng-repeat="cooking in data.cookings">
           <div class="row">
             <div class="col-md-4">
-              <img src="{{ cooking.img }}" class="img-responsive">
+              <img ng-if="!cooking.ImgUrl" src="/assets/chef.png" class="img-responsive thumbnail" style="margin: auto;">
+              <img ng-if="cooking.ImgUrl" src="/{{ cooking.ImgUrl }}" class="img-responsive thumbnail" style="margin: auto;">
             </div>
             <div class="col-md-8">
              <div class="caption" style="display: inline-block;height: 100%;">
-             <h3>{{ cooking.title }}</h3>
-             <p>{{ cooking.username }}</p>
-             <p><a href="/orders/{{ cooking.username }}/{{ cooking.title }}" class="btn btn-primary" role="button">Order Now</a> </p>
+             <h3>{{ cooking.Name }}</h3>
+             <p>{{ cooking.FullName }}</p>
+             <p><a href="/orders/{{ cooking.UserName }}/{{ cooking.Name }}" class="btn btn-primary" role="button">Order Now</a> </p>
               </div>
             </div>
           </div>

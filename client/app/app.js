@@ -74,4 +74,19 @@ angular.module('otbo5ly', [
       $location.path('/signin');
     }
   });
-});
+})
+
+.factory('orderService', function(){
+  var order = {};
+  return {
+    setOrder : function(newOrder){
+      order = newOrder;
+    },
+    getOrder : function(){
+      return order;
+    },
+    clearOrder: function(){
+      order = {};
+    }
+  }
+})
