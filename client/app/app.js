@@ -3,6 +3,7 @@ angular.module('otbo5ly', [
   'otbo5ly.profile',
   'otbo5ly.auth',
   'otbo5ly.main',
+  'otbo5ly.newOrder',
   'ngRoute'
 ])
 .config(function ($routeProvider, $httpProvider) {
@@ -28,7 +29,7 @@ angular.module('otbo5ly', [
       controller: 'ProfileController',
       authenticate: true
     })
-    .when('/order/:user/:cooker/:cooking', {
+    .when('/order/add', {
       templateUrl: 'app/userOrder/newOrder.html',
       controller: 'NewOrderController',
       authenticate: true
@@ -61,7 +62,7 @@ angular.module('otbo5ly', [
   };
   return attach;
 })
-.run(function ($rootScope, $location, Auth) {
+.run(function ($rootScope, $location, $window, Auth) {
   // here inside the run phase of angular, our services and controllers
   // have just been registered and our app is ready
   // however, we want to make sure the user is authorized
@@ -74,4 +75,20 @@ angular.module('otbo5ly', [
       $location.path('/signin');
     }
   });
+
+  //initialzing $rootScope with user data if signed in to show properly data
+
+    if($window.localStorage.getItem('com.otbo5ly')){
+
+      var temp = JSON.parse($window.localStorage.getItem('user.otbo5ly'));
+
+      $rootScope.isLoggedIn = true;
+      $rootScope.UserName = temp.UserName;
+      $rootScope.UserID = temp.ID;
+
+      if(temp.UserTypeName === "cooker"){
+        $rootScope.isCooker = true;
+      }
+
+    }
 });
