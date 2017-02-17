@@ -32,12 +32,15 @@ module.exports = {
 		var cookerID;
 		Users.getUserByUsername(user.username, function(found){
 			if(found.length>0){
+				new Error("this user already exist!!")
 				console.log("this user already exist!!")
 			}
 			else{
+
+				console.log('hhhhhhhhhhhhhhhh')
 				Users.addUser(user, function(newUser){
 					console.log('hhhhhhhhhhhhhhhhhhh', newUser)
-					//insertin the cooker schedule 
+					//inserting the cooker schedule 
 					for (var i = 0; i < days.length; i++) {
 						var obj = {}
 						obj.day = days[i];
@@ -50,9 +53,7 @@ module.exports = {
 					//make surrrrrre of then
 					var token = jwt.encode(newUser, 'secret');
 					res.json({token: token});
-				});
-
-	
+				})
 			}
 		})
 	},
@@ -97,11 +98,6 @@ module.exports = {
 		Orders.addOrder(order, function(order){
 			res.json('Order Added'); 
 		})
-	},
-
-	getTopCookers: function(req, res){
-
-
 	},
 
 	getCookingNames: function(req, res){
