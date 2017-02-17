@@ -11,14 +11,17 @@ module.exports = {
 		var password = req.body.password;
 
 		Users.getUserByUsername(username, function(user){
-			console.log(user)
-			if(password === user[0].Password){
-				var token = jwt.encode(user[0], 'secret');
-				res.json({token: token});
-			}
-			else{
-				console.log('Wrong username Or password')
-				res.status(500).json('Wrong username Or password')
+
+			if(user.length>0){
+				if(password === user[0].Password){
+					delete user[0]['Password'];
+					var token = jwt.encode(user[0], 'secret');
+					res.json(Object.assign(user[0], {token: token}));
+				}
+				else{
+					console.log('Wrong username Or password')
+					res.status(500).json('Wrong username Or password')
+				}
 			}
 		})
 	},
