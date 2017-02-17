@@ -21,25 +21,25 @@ And of course let's not forget about the security matter, because we need the cl
 ## Usage:  
 When you visit the website you should be able to have a visualization of the main page like this:
 <br>
-<img src="photo1.png">
+<img src="photos/photo1.png">
 <br>
 
 Also if you want to sign up you should have something like this:
 <br>
-<img src="photo2.png">
+<img src="photos/photo2.png">
 <br>
 
 And when you make account as a client and you want to make order you should have something like this:
 <br>
-<img src="photo3.png">
+<img src="photos/photo3.png">
 <br>
 
 If you were a cooker your profile should be something like this:
 <br>
-<img src="photo4.png">
+<img src="photos/photo4.png">
 <br>
 
 And as a cooker if you received any order it should be something like this:
 <br>
-<img src="photo5.png">
+<img src="photos/photo5.png">
 <br>
