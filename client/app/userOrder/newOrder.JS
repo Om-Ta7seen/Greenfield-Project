@@ -9,7 +9,7 @@ angular.module('otbo5ly.newOrder', [])
 		$location.path('/');
 	} else {
 		Object.assign($scope.order, OrderService.getOrder());
-		console.log("order coming from main ---- ", $scope.order);
+		//console.log("order coming from main ---- ", $scope.order);
 	}
 
 	var getDeliveryDate = function(){
@@ -26,7 +26,7 @@ angular.module('otbo5ly.newOrder', [])
 				alert('Something went wrong try again');
 			} else {
 				alert('your order has been sent successfully')
-				location.path('/');
+				$location.path('/');
 			}
 		})
 	}
