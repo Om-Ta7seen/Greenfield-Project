@@ -2,11 +2,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var handlers = require('./handlers.js')
 var port = 8000;
-// var morgan = require('morgan');
 
 var app = express();
-// app.set('port', (process.env.PORT || port));
-// app.use(morgan('dev'));
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client'));
@@ -21,6 +19,7 @@ app.get('/api/orders/:username', handlers.getCookerOrders);
 app.get('/api/users/:username', handlers.getCookerProfile);
 app.get('/api/cookingNames', handlers.getCookingNames);
 app.get('/api/todayCookings', handlers.getTodayCookings);
+app.get('/api/topCookers', handlers.getTopCookers);
 
 
 app.listen(process.env.PORT || port);
