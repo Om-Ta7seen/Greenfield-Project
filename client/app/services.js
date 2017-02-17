@@ -81,6 +81,22 @@ angular.module('otbo5ly.services', [])
             throw err;
           }
       });
+    },
+
+    addNewOrder : function(order){
+      return $http({
+        method: 'POST',
+        url: '/api/orders',
+        data : order
+        })
+        .then(function (resp) {
+          return resp;
+        }).catch(function(err){
+          if(err) {
+            console.log(err);
+            return {status:500};
+          }
+      });
     }
 
   }

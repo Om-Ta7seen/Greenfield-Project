@@ -4,12 +4,12 @@ angular.module('otbo5ly.newOrder', [])
 	
 	$scope.order = {};
 
-	if(!OrderService.getOrder().UserID){
+	if(!OrderService.getOrder().userID){
 		alert('you should choose what to order first!');
 		$location.path('/');
 	} else {
 		Object.assign($scope.order, OrderService.getOrder());
-		console.log($scope.order);
+		console.log("order coming from main ---- ", $scope.order);
 	}
 
 	var getDeliveryDate = function(){
@@ -22,9 +22,12 @@ angular.module('otbo5ly.newOrder', [])
 
 	$scope.addOrder = function(){
 		Users.addNewOrder($scope.order).then(function(resp){
-			console.log(resp)
-			alert('your order has been sent successfully')
-			location.path('/');
+			if(resp.status === 500) {
+				alert('Something went wrong try again');
+			} else {
+				alert('your order has been sent successfully')
+				location.path('/');
+			}
 		})
 	}
 	
