@@ -54,7 +54,7 @@ exports.getAllCookByDayNameOrderdByPrice = function (DayName, callback) {
 
 
 exports.getAllCookByDayNameOrderdByPrice = function (callback) {
-    var Query = 'select Users.ID,Users.FullName, Users.UserName, CookerSchedule.DayName,CookNames.Name, CookNames.ID, CookerSchedule.Price \
+    var Query = 'select Users.ID as cookerID,Users.FullName, Users.UserName, CookerSchedule.DayName,CookNames.Name, CookNames.ID as cookNameID, CookerSchedule.Price \
              ,Users.Address \
              ,CookerSchedule.Price \
              from CookerSchedule \
