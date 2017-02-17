@@ -7,9 +7,9 @@ angular.module('otbo5ly.profile', [])
 		$scope.data = data;
 	});
 
-  	$scope.setOrder = function(UserID, cookerID, cookNameID){
+  	$scope.setOrder = function(UserID, cookerID, cookNameID, FullName, cookName){
 		OrderService.setOrder({UserID: UserID, cookerID : cookerID,
-			 cookNameID: cookNameID});
+			 cookNameID: cookNameID, FullName : FullName, cookName: cookName});
 	}
-
+	
 });
