@@ -11,6 +11,14 @@ angular.module('otbo5ly.profile', [])
 		}
 	});
 
+	Users.getCookerOrders($routeParams.user).then(function(data){
+		if(data.UserTypeName === 'cooker'){
+			$scope.orders = data;	
+		} else {
+			$location.path('/');
+		}
+	})
+
   	$scope.setOrder = function(UserID, cookerID, cookNameID, FullName, cookName){
 		OrderService.setOrder({userID: UserID, cookerID : cookerID,
 			 CookNamesID: cookNameID, FullName : FullName, cookName: cookName});
