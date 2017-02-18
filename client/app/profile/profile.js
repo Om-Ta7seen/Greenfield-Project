@@ -17,7 +17,7 @@ angular.module('otbo5ly.profile', [])
   $scope.getOrders = function(){
 	Users.getCookerOrders($routeParams.user).then(function(data){
 		console.log(data);
-			$scope.orders = data;	
+		$scope.orders = data;	
 	})
 	}
 
