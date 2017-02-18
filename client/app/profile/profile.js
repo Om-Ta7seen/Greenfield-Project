@@ -2,6 +2,7 @@ angular.module('otbo5ly.profile', [])
 
 .controller('ProfileController', function ($scope, $routeParams, $window, $location, Users, OrderService) {
   $scope.data = {};
+  $scope.orders = {};
 
   $scope.getProfile = function(){
 	Users.getCookerProfile($routeParams.user).then(function(data) {
@@ -15,6 +16,7 @@ angular.module('otbo5ly.profile', [])
 
   $scope.getOrders = function(){
 	Users.getCookerOrders($routeParams.user).then(function(data){
+		console.log(data);
 		if(data.UserTypeName === 'cooker'){
 			$scope.orders = data;	
 		} else {
