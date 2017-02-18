@@ -13,6 +13,7 @@ exports.getOrdersByUserName = function (UserName, callback) {
 				 ,CookNames.Name, CookNames.ID as cookNameID \
 				 ,Orders.DeliveryDate \
 				 ,Orders.DeliverTime \
+				 ,Order.Quantity \
 				 from Orders \
 				 join Users as Cooker on Cooker.ID = Orders.CookerID \
 				 join CookNames on CookNames.ID = Orders.CookNamesID \
