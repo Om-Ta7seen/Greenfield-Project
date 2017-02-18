@@ -30,7 +30,7 @@ angular.module('otbo5ly', [
       authenticate: true
     })
     .when('/order/add', {
-      templateUrl: 'app/userOrder/newOrder.html',
+      templateUrl: 'app/userorder/newOrder.html',
       controller: 'NewOrderController',
       authenticate: true
     })
