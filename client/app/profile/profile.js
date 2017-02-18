@@ -17,11 +17,7 @@ angular.module('otbo5ly.profile', [])
   $scope.getOrders = function(){
 	Users.getCookerOrders($routeParams.user).then(function(data){
 		console.log(data);
-		if(data.UserTypeName === 'cooker'){
 			$scope.orders = data;	
-		} else {
-			$location.path('/');
-		}
 	})
 	}
 
