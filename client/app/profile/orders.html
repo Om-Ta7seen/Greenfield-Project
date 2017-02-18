@@ -8,7 +8,7 @@
 		}
 	</style>
 
-	<div class="container" ng-controller="ProfileController">
+	<div class="container" ng-controller="ProfileController" ng-init="getOrders()">
 		<br><br><br><br>
 		<h2><center><strong>You Have New Order</strong></center></h2>
 		<div class="info" ng-repeat="order in data.orders"><br>
