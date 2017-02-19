@@ -6,6 +6,7 @@ angular.module('otbo5ly.profile', [])
 
   $scope.getProfile = function(){
 	Users.getCookerProfile($routeParams.user).then(function(data) {
+		console.log(data)
 		if(data.UserTypeName === 'cooker'){
 			$scope.data = data;	
 		} else {

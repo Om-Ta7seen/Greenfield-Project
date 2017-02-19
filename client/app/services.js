@@ -57,7 +57,7 @@ angular.module('otbo5ly.services', [])
         url: '/api/todayCookings/',
         })
         .then(function (resp) {
-          console.log(resp.data);
+          // console.log(resp.data);
           return resp.data;
         }).catch(function(err){
           if(err) {

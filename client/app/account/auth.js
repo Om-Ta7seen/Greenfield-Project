@@ -18,13 +18,14 @@ angular.module('otbo5ly.auth', [])
           } else {
 
             $scope.msg = '';
-
             $window.localStorage.setItem('com.otbo5ly', data.token);
 
             var userData = {ID:data.ID, 
               UserName: data.UserName, UserTypeName: data.UserTypeName};
+
  
             $window.localStorage.setItem('user.otbo5ly', JSON.stringify(userData));
+            console.log($rootScope)
 
             $rootScope.isLoggedIn = true;
             $rootScope.UserName = data.UserName;

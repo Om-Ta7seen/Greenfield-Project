@@ -74,8 +74,12 @@ module.exports = {
 					Object.assign(profile,{schedule:schedule});
 				}
 				CookerSchedule.getCookerTodayCook(username, function(cook){
+				
+
 					if(cook.length>0){
 						Object.assign(profile,{todayCook:cook[0]});
+						console.log("profile5555_________",profile.todayCook)
+
 					}
 					else{
 						Object.assign(profile,{todayCook:''});
