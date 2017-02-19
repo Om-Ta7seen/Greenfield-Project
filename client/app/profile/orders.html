@@ -8,23 +8,28 @@
 		}
 	</style>
 
-	<div class="container">
+	<div class="container" ng-controller="ProfileController" ng-init="getOrders()">
 		<br><br><br><br>
 		<h2><center><strong>You Have New Order</strong></center></h2>
-		<div class="info"><br>
+		<div class="info" ng-repeat="order in orders"><br>
 			<h2><strong><center>Order Details</center></strong></h2>
 			<ul style="font-size:18px">
+
+				<li><strong>Client Name:</strong>
+					<dd>- {{ order.CLientFullName }}</dd>
+				</li>
 				<li><strong>Cook Name:</strong>
-					<dd>- {{user.cookNameID}}</dd>
+					<dd>- {{ order.Name }}</dd>
 				</li>
 				<br>
 				<li><strong>Amount:</strong>
-				<dd>- {{user.quantity}}</dd>
+				<dd>- {{ order.Quantity }}</dd>
 				</li>
 				<br>
-				<li><strong>The Client Will Receive The Order Tomorrow AT :</strong>
-					<dd>- {{user.deliveryTime}}</dd>
+				<li><strong>The Client Will Receive The Order AT :</strong>
+					<dd>- {{ order.DeliveryDate }}    - at {{order.DeliverTime}}</dd>
 				</li>
+
 			</ul><br>	
 		</div>
 		<br><br>

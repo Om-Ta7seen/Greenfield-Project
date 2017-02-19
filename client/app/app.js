@@ -10,7 +10,7 @@ angular.module('otbo5ly', [
   $routeProvider
     .when('/signin', {
       templateUrl: 'app/account/signin.html',
-      controller: 'AuthController'
+      controller: 'AuthController' 
     })
     .when('/signup', {
       templateUrl: 'app/account/signup.html',
@@ -30,7 +30,7 @@ angular.module('otbo5ly', [
       authenticate: true
     })
     .when('/order/add', {
-      templateUrl: 'app/userOrder/newOrder.html',
+      templateUrl: 'app/order/order.html',
       controller: 'NewOrderController',
       authenticate: true
     })
