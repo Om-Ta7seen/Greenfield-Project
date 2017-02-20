@@ -40,10 +40,3 @@ exports.addComment = function (CommentObj, callback) {
     sequelize.query(Query, { replacements: { CookerID: CommentObj.CookerID, HTMLBody: CommentObj.HTMLBody, InsertUserID: CommentObj.InsertUserID }, type: Sequelize.QueryTypes.INSERT })
         .then(callback)
 }
-
-
-
-
-
-
-
