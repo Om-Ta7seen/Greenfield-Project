@@ -21,6 +21,7 @@ app.get('/api/users/:username', handlers.getCookerProfile);
 app.get('/api/cookingNames', handlers.getCookingNames);
 app.get('/api/todayCookings', handlers.getTodayCookings);
 app.get('/api/topCookers', handlers.getTopCookers);
-
+app.get('/api/userProfile/:username', handlers.getUserProfile);////check
+app.get('/api/userOrders/:username', handlers.getUserOrders);////
 
 app.listen(process.env.PORT || port);

@@ -74,8 +74,12 @@ module.exports = {
 					Object.assign(profile,{schedule:schedule});
 				}
 				CookerSchedule.getCookerTodayCook(username, function(cook){
+				
+
 					if(cook.length>0){
 						Object.assign(profile,{todayCook:cook[0]});
+						console.log("profile5555_________",profile.todayCook)
+
 					}
 					else{
 						Object.assign(profile,{todayCook:''});
@@ -125,6 +129,21 @@ module.exports = {
 	getTodayCookings: function(req, res){
 		CookerSchedule.getAllCookByDayNameOrderdByPrice(function(result){
 			res.json(result)
+		})
+	},
+	//////////////////////user
+	getUserOrders: function(req, res){
+		var username = req.params.username;
+		Orders.getUserOrdersByUserName(username, function(orders){
+			res.json(orders);
+		})
+	},
+		getUserProfile: function(req, res){
+		var username = req.params.username;
+		var profile = {};
+		Users.getUserProfileInfo(username, function(user){
+			Object.assign(profile,user[0]);
+			res.json(profile)
 		})
 	}
 
