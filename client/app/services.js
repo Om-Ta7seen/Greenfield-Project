@@ -97,6 +97,37 @@ angular.module('otbo5ly.services', [])
             return {status:500};
           }
       });
+    },
+    //////////////////////
+    getUserProfile : function(username){
+      return $http({
+        method: 'GET',
+        url: '/api/userProfile/'+ username, 
+        })
+        .then(function (resp) {
+          console.log(resp.data);
+          return resp.data;
+        }).catch(function(err){
+          if(err) {
+            console.log(err);
+            throw err;
+          }
+      });
+    },
+    getUserOrders : function(username){
+      return $http({
+        method: 'GET',
+        url: '/api/userOrders/'+ username,
+        })
+        .then(function (resp) {
+          console.log(resp.data);
+          return resp.data;
+        }).catch(function(err){
+          if(err) {
+            console.log(err);
+            throw err;
+          }
+      });
     }
 
   }

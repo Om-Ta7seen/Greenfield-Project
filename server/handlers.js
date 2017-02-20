@@ -130,6 +130,21 @@ module.exports = {
 		CookerSchedule.getAllCookByDayNameOrderdByPrice(function(result){
 			res.json(result)
 		})
+	},
+	//////////////////////user
+	getUserOrders: function(req, res){
+		var username = req.params.username;
+		Orders.getUserOrdersByUserName(username, function(orders){
+			res.json(orders);
+		})
+	},
+		getUserProfile: function(req, res){
+		var username = req.params.username;
+		var profile = {};
+		Users.getUserProfileInfo(username, function(user){
+			Object.assign(profile,user[0]);
+			res.json(profile)
+		})
 	}
 
 }
