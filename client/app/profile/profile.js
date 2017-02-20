@@ -30,4 +30,18 @@ angular.module('otbo5ly.profile', [])
 			 CookNamesID: cookNameID, FullName : FullName, cookName: cookName});
 	}
 
+
+// $(document).ready(function(){
+//     $("#nobtn").click(function(){
+//     	console.log("btata")
+//         $(".no").fadeOut()
+//     });
+   
+// });
+	$scope.dos=function(){
+	console.log('bkh bkh')
+    $(".no").fadeOut()
+}
+
+
 });
