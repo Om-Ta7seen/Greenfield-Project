@@ -13,6 +13,7 @@ exports.getOrdersByUserName = function (UserName, callback) {
 				 ,CookNames.Name, CookNames.ID as cookNameID \
 				 ,Orders.DeliveryDate \
 				 ,Orders.DeliverTime \
+				 ,Orders.approved\
 				 ,Orders.Quantity \
 				 from Orders \
 				 join Users as Cooker on Cooker.ID = Orders.CookerID \
@@ -23,6 +24,44 @@ exports.getOrdersByUserName = function (UserName, callback) {
         .then(callback)
 }
 
+
+///User
+
+// select Users.ID as UsersID,Cooker.ID as CookerID 
+// 				 ,Users.FullName as UsersFullName
+// 				 ,Cooker.FullName as CookerFullName 
+// 				 ,CookNames.Name, CookNames.ID as cookNameID 
+// 				 ,Orders.DeliveryDate 
+// 				 ,Orders.DeliverTime ,
+// 					Orders.approved
+// 				 ,Orders.Quantity 
+// 				 from Orders 
+// 				 join Users  on Users.ID = Orders.UserID 
+// 				 join CookNames on CookNames.ID = Orders.CookNamesID
+// 				 join Users as Cooker on Cooker.ID = Orders.CookerID 
+// 				 where Users.UserName = ''
+
+exports.getUserOrdersByUserName = function (UserName, callback) {
+	var Query = 'Users.ID as UsersID,Cooker.ID as CookerID \
+				 ,Users.FullName as UsersFullName\
+				 ,Cooker.FullName as CookerFullName \
+				 ,CookNames.Name, CookNames.ID as cookNameID \
+				 ,Orders.DeliveryDate \
+				 ,Orders.DeliverTime \
+				 ,Orders.approved\
+				 ,Orders.Quantity \
+				 from Orders \
+				 join Users  on Users.ID = Orders.UserID \
+				 join CookNames on CookNames.ID = Orders.CookNamesID \
+				 join Users as Cooker on Cooker.ID = Orders.CookerID \
+				 where Cooker.UserName = :UserName '
+    sequelize.query(Query, { replacements: { UserName: UserName }, type: Sequelize.QueryTypes.SELECT })
+        .then(callback)
+}
+
+
+
+///
 
 exports.getOrderByID = function (ID, callback) {
     sequelize.query("select * from Orders where ID = :ID", { replacements: { ID: ID }, type: Sequelize.QueryTypes.SELECT })

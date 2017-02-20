@@ -1,7 +1,8 @@
 angular.module('otbo5ly.userProfile', [])
+
 .controller('userProfileController', function ($scope, $routeParams, $window, $location, Users, OrderService) {
   $scope.data = {};
-  $scope.orders{};
+  $scope.orders = {};
   
 
   $scope.getProfile = function(){

@@ -4,7 +4,7 @@ angular.module('otbo5ly', [
   'otbo5ly.auth',
   'otbo5ly.main',
   'otbo5ly.newOrder',
-  // 'otbo5ly.userProfile',
+  'otbo5ly.userProfile',
   'ngRoute'
 ])
 .config(function ($routeProvider, $httpProvider) {

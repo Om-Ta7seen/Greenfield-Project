@@ -34,7 +34,7 @@ angular.module('otbo5ly.auth', [])
             if(data.UserTypeName === 'cooker'){
               $rootScope.isCooker = true;
               $location.path('/users/'+ data.UserName );
-            }else if(data.UserTypeName === 'cooker'){
+            }else if(data.UserTypeName === 'user'){
                 $rootScope.isUser = true;
                 $location.path('/userProfile/'+data.UserName);
             }else{ $location.path('/') }
