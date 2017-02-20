@@ -39,8 +39,8 @@ exports.getOrdersByUserName = function (UserName, callback) {
 // 				 join Users  on Users.ID = Orders.UserID 
 // 				 join CookNames on CookNames.ID = Orders.CookNamesID
 // 				 join Users as Cooker on Cooker.ID = Orders.CookerID 
-// 				 where Users.UserName = 'userh'
-				 
+// 				 where Users.UserName = ''
+
 exports.getUserOrdersByUserName = function (UserName, callback) {
 	var Query = 'Users.ID as UsersID,Cooker.ID as CookerID \
 				 ,Users.FullName as UsersFullName\
