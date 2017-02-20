@@ -143,6 +143,7 @@ module.exports = {
 		var profile = {};
 		Users.getUserProfileInfo(username, function(user){
 			Object.assign(profile,user[0]);
+			console.log("************",profile)
 			res.json(profile)
 		})
 	}
