@@ -42,7 +42,7 @@ exports.getOrdersByUserName = function (UserName, callback) {
 // 				 where Users.UserName = ''
 
 exports.getUserOrdersByUserName = function (UserName, callback) {
-	var Query = 'Users.ID as UsersID,Cooker.ID as CookerID \
+	var Query = ' select Users.ID as UsersID,Cooker.ID as CookerID \
 				 ,Users.FullName as UsersFullName\
 				 ,Cooker.FullName as CookerFullName \
 				 ,CookNames.Name, CookNames.ID as cookNameID \
@@ -54,7 +54,7 @@ exports.getUserOrdersByUserName = function (UserName, callback) {
 				 join Users  on Users.ID = Orders.UserID \
 				 join CookNames on CookNames.ID = Orders.CookNamesID \
 				 join Users as Cooker on Cooker.ID = Orders.CookerID \
-				 where Cooker.UserName = :UserName '
+				 where Users.UserName = :UserName '
     sequelize.query(Query, { replacements: { UserName: UserName }, type: Sequelize.QueryTypes.SELECT })
         .then(callback)
 }
