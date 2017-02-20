@@ -24,3 +24,4 @@ app.get('/api/topCookers', handlers.getTopCookers);
 
 
 app.listen(process.env.PORT || port);
+console.log('work on port '+ port )
