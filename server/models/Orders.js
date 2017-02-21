@@ -14,6 +14,7 @@ exports.getOrdersByUserName = function (UserName, callback) {
 				 ,Orders.DeliveryDate \
 				 ,Orders.DeliverTime \
 				 ,Orders.approved\
+				 ,Orders.ID as OrderID\
 				 ,Orders.Quantity \
 				 from Orders \
 				 join Users as Cooker on Cooker.ID = Orders.CookerID \
@@ -49,6 +50,7 @@ exports.getUserOrdersByUserName = function (UserName, callback) {
 				 ,Orders.DeliveryDate \
 				 ,Orders.DeliverTime \
 				 ,Orders.approved\
+				 ,Orders.ID as OrderID\
 				 ,Orders.Quantity \
 				 from Orders \
 				 join Users  on Users.ID = Orders.UserID \
