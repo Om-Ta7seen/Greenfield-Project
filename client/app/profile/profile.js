@@ -18,6 +18,7 @@ angular.module('otbo5ly.profile', [])
   $scope.getOrders = function(){
 	Users.getCookerOrders($routeParams.user).then(function(data){
 		if(JSON.parse($window.localStorage.getItem('user.otbo5ly')).UserTypeName === "cooker"){
+			console.log("oooooooooooooooooo",data)
 			$scope.orders = data;	
 		} else {
 			$location.path('/');
