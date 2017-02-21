@@ -77,3 +77,16 @@ exports.addOrder = function (orderObj, callback) {
 	sequelize.query(Query, { replacements: { CookerID: orderObj.cookerID, UserID: orderObj.userID, DeliveryDate: orderObj.deliveryDate, DeliverTime: orderObj.deliveryTime,CookNamesID:orderObj.CookNamesID ,Quantity: orderObj.quantity }, type: Sequelize.QueryTypes.INSERT })
 		.then(callback)
 }
+
+exports.AcceptOrder= function (OrderID, callback) {
+	var Query = 'update Orders SET approved = "yes" where ID = OrderID';
+	sequelize.query(Query, { replacements: {ID : OrderID}, type: Sequelize.QueryTypes.UPDATE })
+		.then(callback)
+}
+
+
+exports.CancelOrder= function (OrderID, callback) {
+	var Query = 'update Orders SET approved = "no" where ID = OrderID';
+	sequelize.query(Query, { replacements: {ID : OrderID}, type: Sequelize.QueryTypes.UPDATE })
+		.then(callback)
+}

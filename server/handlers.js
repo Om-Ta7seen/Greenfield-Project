@@ -146,6 +146,20 @@ module.exports = {
 			console.log("************",profile)
 			res.json(profile)
 		})
+	},
+	AcceptOrder : function(req,res){
+		var OrderID = req.body.OrderID
+		Orders.AcceptOrder(OrderID,function(){
+			res.json("Order accepted")
+		})
+
+	},
+	CancelOrder : function(req,res){
+		var OrderID = req.body.OrderID;
+		Orders.CancelOrder(OrderID,function(){
+			res.json("Order canceled")
+		})
 	}
 
 }
+	
