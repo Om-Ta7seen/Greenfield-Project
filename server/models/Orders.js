@@ -80,6 +80,7 @@ exports.addOrder = function (orderObj, callback) {
 		.then(callback)
 }
 
+
 exports.AcceptOrder= function (ID, callback) {
 	console.log( '=============--------',ID)
 	var Query = 'UPDATE Orders SET approved = "yes" where ID = :ID';
@@ -94,3 +95,11 @@ exports.CancelOrder= function (ID, callback) {
 	sequelize.query(Query, { replacements: {ID : ID}, type: Sequelize.QueryTypes.UPDATE })
 		.then(callback)
 }
+
+exports.DeleteOrder= function (ID, callback) {
+	console.log(ID)
+	var Query = 'DELETE from Orders where ID = :ID';
+	sequelize.query(Query, { replacements: {ID : ID}, type: Sequelize.QueryTypes.DELETE })
+		.then(callback)
+}
+

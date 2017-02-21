@@ -161,7 +161,14 @@ module.exports = {
 		Orders.CancelOrder(OrderID,function(orders){
 			res.json(orders)
 		})
+	},
+	DeleteOrder : function(req,res){
+		var OrderID = req.body.orderId;
+		Orders.DeleteOrder(OrderID,function(orders){
+			res.json(orders)
+		})
 	}
+
 
 }
 	
