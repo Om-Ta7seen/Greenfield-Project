@@ -26,6 +26,7 @@ app.get('/api/userOrders/:username', handlers.getUserOrders);////
 
 app.post('/api/Approve',handlers.AcceptOrder);
 app.post('/api/cancelOrder',handlers.CancelOrder);
+app.post('/api/cancelOrder',handlers.DeleteOrder);
 
 app.listen(process.env.PORT || port);
 console.log('work on port '+ port )
