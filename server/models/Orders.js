@@ -80,14 +80,15 @@ exports.addOrder = function (orderObj, callback) {
 
 exports.AcceptOrder= function (OrderID, callback) {
 	console.log( '=============--------',OrderID)
-	var Query = 'update Orders SET approved = "yes" where ID = OrderID';
+	var Query = 'update Orders SET approved = "yes" where ID = :OrderID';
 	sequelize.query(Query, { replacements: {ID : OrderID}, type: Sequelize.QueryTypes.BULKUPDATE })
 		.then(callback)
 }
 
 
 exports.CancelOrder= function (OrderID, callback) {
+	console.log('ordeeeeeeeeeeeeeeeeerIIIIId',ID)
 	var Query = 'update Orders SET approved = "no" where ID = OrderID';
-	sequelize.query(Query, { replacements: {ID : OrderID}, type: Sequelize.QueryTypes.UPDATE })
-		.then(callback)
+	// sequelize.query(Query, { replacements: {ID : OrderID}, type: Sequelize.QueryTypes.BULKUPDATE })
+	// 	.then(callback)
 }
