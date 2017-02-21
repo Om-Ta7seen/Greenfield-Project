@@ -148,18 +148,18 @@ module.exports = {
 		})
 	},
 	AcceptOrder : function(req,res){
-		var OrderID = req.body.orderId
+		var OrderID = req.body.orderId;
 		console.log('--=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-',req.body.orderId)
-		Orders.AcceptOrder(OrderID,function(){
+		Orders.AcceptOrder(OrderID,function(orders){
 
-			res.json("Order accepted")
+			res.json(orders)
 		})
 
 	},
 	CancelOrder : function(req,res){
-		var OrderID = req.body.OrderID;
-		Orders.CancelOrder(OrderID,function(){
-			res.json("Order canceled")
+		var OrderID = req.body.orderId;
+		Orders.CancelOrder(OrderID,function(orders){
+			res.json(orders)
 		})
 	}
 

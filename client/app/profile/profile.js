@@ -41,7 +41,7 @@ angular.module('otbo5ly.profile', [])
 	}
 	$scope.cancelOrder = function(orderId){
 
-        Approve.cancelOrder(orderId).then(
+        Approve.cancelOrder({orderId:orderId}).then(
             console.log('in cancel order')
         	)
 	}

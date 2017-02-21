@@ -7,6 +7,7 @@ exports.getAll = function (callback) {
 }
 
 exports.getOrdersByUserName = function (UserName, callback) {
+	console.log('1111!!!111!!!!!!111',UserName)
 	var Query = 'select Cooker.ID as CookerID,CLient.ID as ClientID \
 				 ,Cooker.FullName as CookerFullName\
 				 ,CLient.FullName as CLientFullName \
@@ -43,6 +44,7 @@ exports.getOrdersByUserName = function (UserName, callback) {
 // 				 where Users.UserName = ''
 
 exports.getUserOrdersByUserName = function (UserName, callback) {
+
 	var Query = ' select Users.ID as UsersID,Cooker.ID as CookerID \
 				 ,Users.FullName as UsersFullName\
 				 ,Cooker.FullName as CookerFullName \
@@ -78,17 +80,18 @@ exports.addOrder = function (orderObj, callback) {
 		.then(callback)
 }
 
-exports.AcceptOrder= function (OrderID, callback) {
-	console.log( '=============--------',OrderID)
-	var Query = 'update Orders SET approved = "yes" where ID = :OrderID';
-	sequelize.query(Query, { replacements: {ID : OrderID}, type: Sequelize.QueryTypes.BULKUPDATE })
+
+exports.AcceptOrder= function (ID, callback) {
+	console.log( '=============--------',ID)
+	var Query = 'UPDATE Orders SET approved = "yes" where ID = :ID';
+	sequelize.query(Query, { replacements: {ID : ID}, type: Sequelize.QueryTypes.BULKUPDATE })
 		.then(callback)
 }
 
 
-exports.CancelOrder= function (OrderID, callback) {
-	console.log('ordeeeeeeeeeeeeeeeeerIIIIId',ID)
-	var Query = 'update Orders SET approved = "no" where ID = OrderID';
-	// sequelize.query(Query, { replacements: {ID : OrderID}, type: Sequelize.QueryTypes.BULKUPDATE })
-	// 	.then(callback)
+exports.CancelOrder= function (ID, callback) {
+		console.log('in cancel Order !!!!',ID)
+	var Query = 'update Orders SET approved = "no" where ID = :ID';
+	sequelize.query(Query, { replacements: {ID : ID}, type: Sequelize.QueryTypes.UPDATE })
+		.then(callback)
 }
