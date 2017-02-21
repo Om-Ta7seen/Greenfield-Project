@@ -95,3 +95,11 @@ exports.CancelOrder= function (ID, callback) {
 	sequelize.query(Query, { replacements: {ID : ID}, type: Sequelize.QueryTypes.UPDATE })
 		.then(callback)
 }
+
+exports.DeleteOrder= function (ID, callback) {
+
+	var Query = 'DELETE from Orders where ID = :ID';
+	sequelize.query(Query, { replacements: {ID : ID}, type: Sequelize.QueryTypes.DELETE })
+		.then(callback)
+}
+
