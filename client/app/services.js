@@ -231,6 +231,16 @@ angular.module('otbo5ly.services', [])
           console.log(resp)
           return resp.data;
         });
+    },
+    DeleteOrder : function (orderId){
+      return $http({
+        method: 'POST',
+        url   : '/api/DeleteOrder',
+        data  : orderId
+      })
+      .then(function(resp){
+        return resp.data;
+      })
     }
   }
 });
