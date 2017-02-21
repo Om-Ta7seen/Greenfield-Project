@@ -59,9 +59,7 @@
 					<dd>- {{ order.DeliveryDate }}    - at {{order.DeliverTime}}</dd>
 				</li>
 				<br>
-			    <li><strong><p
-					 style=" font-size: 25px;">Do You Agree This Order</p>
-
+			    <li><strong><p style=" font-size: 25px;">Do You Agree This Order</p>
 	        	<input  id="yesbtn" type="submit" value="yes" ng-click="myVar='yes';acceptOrder(order.OrderID)"
 	        	ng-model="order.approved">
 				<input id="nobtn" type="submit" value="no" ng-click="myVar='no';dos();cancelOrder(order.OrderID)"
