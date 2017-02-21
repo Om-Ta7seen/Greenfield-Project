@@ -18,7 +18,21 @@ angular.module('otbo5ly.userProfile', [])
   $scope.getOrders = function(){
 	Users.getUserOrders($routeParams.user).then(function(data){
 		if(JSON.parse($window.localStorage.getItem('user.otbo5ly')).UserTypeName === "user"){
-			console.log("in profile ",data)
+
+			for(var i=0;i<data.length;i++){
+				if(data[i].approved === 'none'){
+					data[i].approved = 'your order waiting the cook answer'
+				}
+				if(data[i].approved === 'yes'){
+					data[i].approved = 'your order accepted'
+				}
+				if(data[i].approved === 'no'){
+					data[i].approved = 'your order denid'
+				}
+			}
+
+			
+
 			$scope.orders = data;	
 		} else {
 			$location.path('/');

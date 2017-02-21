@@ -43,8 +43,10 @@
               and if user is logged in
               its value is set when user sign in or signup
            -->
-          <li ng-show="$root.isCooker"><a href="#/users/{{ $root.UserName }}">My Profile</a></li>
-          <li ng-show="$root.isCooker"><a href="#/orders/{{ $root.UserName }}">My Orders</a></li>
+          <li ng-if="$root.isCooker"><a href="#/users/{{ $root.UserName }}">My Profile</a></li>
+         <li ng-if="$root.isCooker"><a href="#/orders/{{ $root.UserName }}">My order</a></li>
+          <li ng-if="$root.isUser"><a href="#/userProfile/{{ $root.UserName }}">My Profile</a></li>
+
           <li ng-show="!$root.isLoggedIn"><a href="#/signin">Sign In</a></li>
           <li ng-show="!$root.isLoggedIn"><a href="#/signup">Sign Up</a></li>
           <li ng-show="$root.isLoggedIn"><a href="#/signout">Sign out</a></li>

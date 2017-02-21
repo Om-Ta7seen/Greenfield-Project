@@ -1,4 +1,4 @@
-<div class="container" ng-init="getProfile()">
+<div class="container" ng-controller="userProfileController" ng-init="getProfile()">
 <div class="row" style="
 background: url('assets/inside-bg.jpg');
 background-position: top;
@@ -49,55 +49,7 @@ padding-top: 100px;
 </div>
 
 
-
-
-
-  <div class="container" ng-init="getOrders()">
-    <br><br><br><br>
-    <h2><center><strong>You Have New Order</strong></center></h2>
-    <div class="info" ng-repeat="order in orders"><br>
-    <div ng-model='order.approved'>
-
-    <div  class="order.approved" >
-
-      <h2><strong><center>Order Details</center></strong></h2>
-      
-      <ul style="font-size:18px">
-     
-
-        <li><strong>Client Name:</strong>
-          <dd>- {{ order.CLientFullName }}</dd>
-        </li>
-        <li><strong>Cook Name:</strong>
-          <dd>- {{ order.Name }}</dd>
-        </li>
-        <br>
-        <li><strong>Amount:</strong>
-        <dd>- {{ order.Quantity }}</dd>
-        </li>
-        <br>
-        <li><strong> Receive The Order AT :</strong>
-          <dd>- {{ order.DeliveryDate }}    - at {{order.DeliverTime}}</dd>
-        </li>
-
-         <li><strong>Amount:</strong>
-        <dd>- {{ order.Quantity }}</dd>
-        </li>
-<!-- -aaaaaaaa -->
-
-        <li  ><strong>Amount:</strong>
-        <dd>- {{ order.Quantity }}</dd>
-        </li>
-</div>
-
-<!-- aasdasd-pp=p=p=p=p -->
-      </ul><br> 
-      </div>
-<!-- haskljfhla -->
-
-    </div>
-    <br><br>
-    <style>
+   <style>
     .none {
       background-color: #e7f3fe;
       border-left: 30px solid #2196F3;
@@ -110,10 +62,57 @@ padding-top: 100px;
       background-color: #e7f3fe;
       border-left: 30px solid #b21813;
     }
+    .ifo{
+      background-color: #e7f3fe;
+      border-left: 10px solid #2196F3;
+      border-right: 10px solid #2196F3;
+      border-bottom: 10px solid #2196F3;
+      border-top: 10px solid #2196F3;
+
+    }
   </style>
-green = #096d27
-red =#b21813
-hold=#2196F3
+
+
+
+ <div class="container"  ng-init="getOrders()" >
+    <br><br><br><br>
+
+    <h2><center><strong>You Have New Order</strong></center></h2>
+    <div  ng-repeat="order in orders"><br>
+    <div ng-class="myVar" >
+    <div class="ifo" >
+      <h2><strong><center>Order Details</center></strong></h2>
+
+      <ul style="font-size:18px"> 
+
+
+        <li><strong>Client Name:</strong>
+          <dd>- {{ order.CLientFullName }}</dd>
+        </li>
+        <li><strong>Cook Name:</strong>
+          <dd>- {{ order.Name }}</dd>
+        </li>
+        <br>
+        <li><strong>Amount:</strong>
+        <dd>- {{ order.Quantity }}</dd>
+        </li>
+        
+        <li><strong>The Client Will Receive The Order AT :</strong>
+          <dd>- {{ order.DeliveryDate }}    - at {{order.DeliverTime}}</dd>
+        </li>
+        <br>
+        <li><strong>
+
+
+          <p style=" font-size: 25px;">{{order.approved}}</p>
+        
+
+        <input id="nobtn" type="submit" value="no" ng-click="myVar='no';dos();cancelOrder(order.ID)"
+        ng-model="order.approved">
+        
+        </li>
+        <br>
+      </ul><br>
 
   <!--   <center><strong>
       <p style=" font-size: 25px;"> I Can Handle It <input type="checkbox" ng-model = "accept" ng-init = "false">
