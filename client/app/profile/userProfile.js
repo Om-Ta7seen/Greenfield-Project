@@ -18,6 +18,7 @@ angular.module('otbo5ly.userProfile', [])
   $scope.getOrders = function(){
 	Users.getUserOrders($routeParams.user).then(function(data){
 		if(JSON.parse($window.localStorage.getItem('user.otbo5ly')).UserTypeName === "user"){
+			console.log("in profile ",data)
 			$scope.orders = data;	
 		} else {
 			$location.path('/');
