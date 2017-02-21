@@ -30,16 +30,19 @@ angular.module('otbo5ly.profile', [])
 			 CookNamesID: cookNameID, FullName : FullName, cookName: cookName});
 	}
 
+	$scope.acceptOrder = function(orderId){
+		console.log('in accept order')
+		Approve.acceptOrder(orderId).then(
+			
+			)
+	}
+	$scope.cancelOrder = function(orderId){
+        Approve.cancelOrder(orderId).then(
+            console.log('in cancel order')
+        	)
+	}
 
-// $(document).ready(function(){
-//     $("#nobtn").click(function(){
-//     	console.log("btata")
-//         $(".no").fadeOut()
-//     });
-   
-// });
 	$scope.dos=function(){
-	console.log('bkh bkh')
     $(".no").fadeOut()
 }
 

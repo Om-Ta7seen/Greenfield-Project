@@ -204,4 +204,40 @@ angular.module('otbo5ly.services', [])
       order = {};
     }
   }
+})
+
+
+
+
+
+.factory('Approve', function($window, $location){
+  return {
+    cancelOrder : function(orderId){
+
+      return $http({
+          method: 'POST',
+          url: '/api/cancelOrder',
+          data: orderId
+        })
+        .then(function (resp) {
+          return resp.data;
+        });
+  },
+
+    
+    
+    acceptOrder : function(orderId){
+       return $http({
+          method: 'POST',
+          url: '/api/Approve',
+          data: orderId
+        })
+        .then(function (resp) {
+          return resp.data;
+        });
+    }
+  }
 });
+
+
+
