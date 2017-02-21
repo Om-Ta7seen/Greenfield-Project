@@ -24,8 +24,8 @@ app.get('/api/topCookers', handlers.getTopCookers);
 app.get('/api/userProfile/:username', handlers.getUserProfile);////chec
 app.get('/api/userOrders/:username', handlers.getUserOrders);////
 
-// app.post('/api/Approve',handlers.AcceptOrder)
-// app.post('/api/cancelOrder',handlers.CancelOrder)
+app.post('/api/Approve',handlers.AcceptOrder);
+app.post('/api/cancelOrder',handlers.CancelOrder);
 
 app.listen(process.env.PORT || port);
 console.log('work on port '+ port )

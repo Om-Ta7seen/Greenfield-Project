@@ -79,8 +79,9 @@ exports.addOrder = function (orderObj, callback) {
 }
 
 exports.AcceptOrder= function (OrderID, callback) {
+	console.log( '=============--------',OrderID)
 	var Query = 'update Orders SET approved = "yes" where ID = OrderID';
-	sequelize.query(Query, { replacements: {ID : OrderID}, type: Sequelize.QueryTypes.UPDATE })
+	sequelize.query(Query, { replacements: {ID : OrderID}, type: Sequelize.QueryTypes.BULKUPDATE })
 		.then(callback)
 }
 

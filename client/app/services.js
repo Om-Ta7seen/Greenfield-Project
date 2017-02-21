@@ -206,11 +206,7 @@ angular.module('otbo5ly.services', [])
   }
 })
 
-
-
-
-
-.factory('Approve', function($window, $location){
+.factory('Approve', function($http,$window, $location){
   return {
     cancelOrder : function(orderId){
 
@@ -220,11 +216,10 @@ angular.module('otbo5ly.services', [])
           data: orderId
         })
         .then(function (resp) {
+
           return resp.data;
         });
   },
-
-    
     
     acceptOrder : function(orderId){
        return $http({
@@ -233,6 +228,7 @@ angular.module('otbo5ly.services', [])
           data: orderId
         })
         .then(function (resp) {
+          console.log(resp)
           return resp.data;
         });
     }

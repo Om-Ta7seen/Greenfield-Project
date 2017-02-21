@@ -148,8 +148,10 @@ module.exports = {
 		})
 	},
 	AcceptOrder : function(req,res){
-		var OrderID = req.body.OrderID
+		var OrderID = req.body.orderId
+		console.log('--=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-',req.body.orderId)
 		Orders.AcceptOrder(OrderID,function(){
+
 			res.json("Order accepted")
 		})
 
