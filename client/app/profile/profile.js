@@ -1,6 +1,6 @@
 angular.module('otbo5ly.profile', [])
 
-.controller('ProfileController', function ($scope, $routeParams, $window, $location, Users, OrderService,Approve) {
+.controller('ProfileController', function ($scope, $routeParams, $window, $location,$route, Users, OrderService,Approve) {
   $scope.data = {};
   $scope.orders = {};
 
@@ -35,23 +35,22 @@ angular.module('otbo5ly.profile', [])
 		console.log(orderId)
 
 		console.log('in accept order')
-		Approve.acceptOrder({orderId:orderId}).then(
-			
-			)
+		Approve.acceptOrder({orderId:orderId}).then(function(){
+        	$route.reload();
+
+		})
 	}
 	$scope.cancelOrder = function(orderId){
 
-        Approve.cancelOrder({orderId:orderId}).then(
-            console.log('in cancel order')
-        	)
+        Approve.cancelOrder({orderId:orderId}).then(function(){
+        	$route.reload();
+        })
 	}
 
 	$scope.dos=function(){
     $(".no").fadeOut()
 }
-$scope.scoreClass = function(scores) {
-    return scores.Indicator == 'Negative' ? 'warning': 'ok';
-}
+
 
 
 });
