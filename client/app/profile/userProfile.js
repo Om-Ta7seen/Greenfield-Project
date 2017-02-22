@@ -1,8 +1,9 @@
 angular.module('otbo5ly.userProfile', [])
 
-.controller('userProfileController', function ($scope, $routeParams, $window,$route, $location, Users, OrderService,Approve) {
+.controller('userProfileController', function ($scope, $routeParams, $window,$route, $location, Users, OrderService,Approve,Special) {
   $scope.data = {};
   $scope.orders = {};
+  $scope.Sorder = {};
   
 
   $scope.getProfile = function(){
@@ -44,6 +45,18 @@ angular.module('otbo5ly.userProfile', [])
         Approve.DeleteOrder({orderId:orderId}).then(function(){
         	$route.reload();
         })
+	}
+
+	$scope.getAllCookers = function () {
+		Users.getAllCookers().then(function(data){
+			console.log(data)
+		})
+	}
+
+	$scope.AddSpecialOrder = function(){
+		Special.AddSpecialOrder($scope.order).then(function(){
+			console.log(" in add speacial")
+		})
 	}
 
 

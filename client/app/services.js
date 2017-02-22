@@ -128,6 +128,19 @@ angular.module('otbo5ly.services', [])
             throw err;
           }
       });
+    },
+    getAllCookers : function(){
+      return $http({
+        method: 'GET',
+        url: '/api/getAllCookerscookers/'
+      }).then(function(resp){
+        return resp.data;
+      }).catch(function(err){
+        if(err){
+          console.log(err);
+          throw err;
+        }
+      })
     }
 
   }
@@ -243,6 +256,28 @@ angular.module('otbo5ly.services', [])
       })
     }
   }
+})
+
+.factory('Special',function($http,$window, $location){
+  return{
+    AddSpecialOrder : function(order){
+      return $http({
+        method: 'POST',
+        url   : '/api/AddSpecial',
+        data  : order 
+      })
+      .then(function (resp) {
+          return resp;
+        }).catch(function(err){
+          if(err) {
+            console.log(err);
+            return {status:500};
+          }
+    })
+ 
+   }
+ }
+
 });
 
 
