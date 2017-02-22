@@ -1,7 +1,7 @@
 angular.module('otbo5ly.newOrder', [])
 
 
-.controller('NewOrderController', function ($scope, $location, Users, Auth, OrderService) {
+.controller('NewOrderController', function ($scope, $location, Users, Auth, OrderService,$rootScope) {
 	
 	$scope.order = {};
 
