@@ -49,6 +49,9 @@ angular.module('otbo5ly.profile', [])
 	$scope.dos=function(){
     $(".no").fadeOut()
 }
+$scope.scoreClass = function(scores) {
+    return scores.Indicator == 'Negative' ? 'warning': 'ok';
+}
 
 
 });
