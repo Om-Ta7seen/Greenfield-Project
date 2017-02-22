@@ -21,7 +21,8 @@ exports.getOrdersByUserName = function (UserName, callback) {
 				 join Users as Cooker on Cooker.ID = Orders.CookerID \
 				 join CookNames on CookNames.ID = Orders.CookNamesID \
 				 join Users as CLient on CLient.ID = Orders.UserID \
-				 where Cooker.UserName = :UserName '
+				 where Cooker.UserName = :UserName AND approved != "no" \
+				 order by DeliveryDate Desc'
     sequelize.query(Query, { replacements: { UserName: UserName }, type: Sequelize.QueryTypes.SELECT })
         .then(callback)
 }
@@ -58,7 +59,8 @@ exports.getUserOrdersByUserName = function (UserName, callback) {
 				 join Users  on Users.ID = Orders.UserID \
 				 join CookNames on CookNames.ID = Orders.CookNamesID \
 				 join Users as Cooker on Cooker.ID = Orders.CookerID \
-				 where Users.UserName = :UserName '
+				 where Users.UserName = :UserName \
+				 order by DeliveryDate Desc '
     sequelize.query(Query, { replacements: { UserName: UserName }, type: Sequelize.QueryTypes.SELECT })
         .then(callback)
 }
@@ -97,9 +99,18 @@ exports.CancelOrder= function (ID, callback) {
 }
 
 exports.DeleteOrder= function (ID, callback) {
-	console.log(ID)
+	console.log("deletttttttttttttttt",ID)
 	var Query = 'DELETE from Orders where ID = :ID';
 	sequelize.query(Query, { replacements: {ID : ID}, type: Sequelize.QueryTypes.DELETE })
+		.then(callback)
+}
+
+
+
+exports.SpecialOrder = function (orderObj, callback) {
+	var Query = 'insert into Orders (CookerID,UserID,DeliveryDate,DeliverTime,CookNamesID,Quantity,special,dishe) \
+                 values (:CookerID,:UserID,:DeliveryDate,:DeliverTime, :CookNamesID, :Quantity, :special, :dishe)';
+	sequelize.query(Query, { replacements: { CookerID: orderObj.cookerID, UserID: orderObj.userID, DeliveryDate: orderObj.deliveryDate, DeliverTime: orderObj.deliveryTime,CookNamesID:orderObj.CookNamesID ,Quantity: orderObj.quantity }, type: Sequelize.QueryTypes.INSERT })
 		.then(callback)
 }
 
