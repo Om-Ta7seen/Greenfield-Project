@@ -105,6 +105,7 @@ module.exports = {
 
 	addOrder: function(req, res){
 		var order = req.body;
+		console.log('wwwwwwwwwwwwwwwwwww',res.json())
 		Orders.addOrder(order, function(order){
 			res.json('Order Added'); 
 		})
@@ -167,6 +168,20 @@ module.exports = {
 		console.log("in handlerrrrrrrrrrrrrrr",OrderID)
 		Orders.DeleteOrder(OrderID,function(orders){
 			res.json(orders)
+		})
+	},
+	SpecialOrder: function(req, res){
+		var order = req.body;
+		 
+		Orders.SpecialOrder(order, function(order){
+			res.json('Order Added'); 
+		})
+	},
+	GetAllCookers :function(req, res){
+		Users.GetAllCookers(function(cookers){
+			if(cookers){
+				res.json(cookers);
+			}
 		})
 	}
 
