@@ -1,3 +1,28 @@
+  <style>
+  .modal-header, h4, .close {
+      background-color: #5cb85c;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+      }
+  .modal-footer {
+      background-color: #f9f9f9;
+  }
+  </style>
+
+
+
+ 
+<script>
+$(document).ready(function(){
+    $("#myBtn").click(function(){
+        $("#myModal").modal();
+    });
+});
+</script>
+
+
+
 <div class="container" ng-controller="userProfileController" ng-init="getProfile()">
 <div class="row" style="
 background: url('assets/inside-bg.jpg');
@@ -29,19 +54,84 @@ padding-top: 100px;
     </p>
   </div>
 
-
   <div class="col-md-6 col-xs-12">
     <i class="glyphicon glyphicon-envelope" style="font-size: 3em;"></i>
     <p style="line-height: 40px;font-size: 15pt;">{{ data.Email }}</p>
   </div>
-
 </div>
 
-<div class="col-xs-12" style="margin-top: 50px;" ng-if="data.todayCook !== ''">  
+
+<!-- 
+      S
+        P   E
+                c ial
+
+ -->
+
+<div class="col-md-6 col-xs-12"  >
+  <!-- <h2>Want a Special Dish</h2> -->
+  <h1 style="font-weight: bold;color: #fff;text-align: left;margin-bottom: 40px;">
+  Want a Special Dish</h1>
+
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-default btn-lg" id="myBtn">Let's Order</button>
+
+  <!-- Modal -->
+  <div ng-controller="userProfileController"
+             class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+
+      <div class="modal-content">
+        <div class="modal-header" style="padding:35px 50px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4><span class="glyphicon glyphicon-fire"></span> Special Order</h4>
+        </div>
+        <!-- here to put the ng -->
+        <div class="modal-body" style="padding:40px 50px;">
+          <form role="form">
+            <div class="form-group" >
+              <label for="DIshName"><span class="glyphicon glyphicon-user"></span> Name of The Dish</label>
+              <input type="text" class="form-control" ng-model="Sorder.DishName" placeholder="Enter Name of The Dish">
+            </div>
+
+
+
+
+            <div class="form-group" ng-controller="userProfileController">
+              <label for="DIshName"><span class="glyphicon glyphicon-user"></span> Select Cook</label>
+               <select ng-options="item for item in cookerName" class="form-control" name="singleSelect" ng-model="Sorder.cookerName" required>
+                </select>
+            </div>
+
+          
+             <div class="form-group" >
+              <label for="DIshName"> Number of Meals</label>
+              <input type="text" class="form-control" ng-model="Sorder.quantity" placeholder="Quantity">
+            </div>
+
+             <div class="form-group" >
+              <label for="DIshName"> Delivery Time</label>
+              <input type="text" class="form-control" ng-model="Sorder.deliveryTime" placeholder="ex : 4:00">
+            </div>
+
+              <button ng-click="SpecialOrder(Sorder)" type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Send Order</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
+</div>
+<!-- <div class="col-xs-12" style="margin-top: 50px;" ng-if="data.todayCook !== ''">  
   <span style="padding: 20px;font-size: 1.7em;color: #fff;"><b>{{ data.FullName }}</b> cooking for today is : <b>{{ data.todayCook.Name }}</b>, just for 
   <b>{{ data.todayCook.Price }}</b> JOD!</span>
   <button ng-click="setOrder($root.UserID, data.todayCook.ID, 1, data.todayCook.FullName, data.todayCook.Name)" class="btn btn-lg btn-primary">Order now</button>
-</div>
+</div> -->
 
 </div>
 </div>
