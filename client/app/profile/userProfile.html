@@ -97,17 +97,17 @@ padding-top: 100px;
         <dd>- {{ order.Quantity }}</dd>
         </li>
         
-        <li><strong>The Client Will Receive The Order AT :</strong>
+        <li><strong>You Will Receive The Order AT :</strong>
           <dd>- {{ order.DeliveryDate }}    - at {{order.DeliverTime}}</dd>
         </li>
         <br>
-        <li><strong>
+        <li><strong><p style=" font-size: 25px;">{{order.approved}}</p>
+          
 
 
-          <p style=" font-size: 25px;">{{order.approved}}</p>
         
 
-        <input id="nobtn" type="submit" value="no" ng-click="myVar='no';dos();cancelOrder(order.ID)"
+        <input ng-if="order.approved !== 'your order accepted'" id="nobtn" type="submit" value="Cancel-Order" ng-click="myVar='no';DeleteOrder(order.OrderID)"
         ng-model="order.approved">
         
         </li>

@@ -164,6 +164,7 @@ module.exports = {
 	},
 	DeleteOrder : function(req,res){
 		var OrderID = req.body.orderId;
+		console.log("in handlerrrrrrrrrrrrrrr",OrderID)
 		Orders.DeleteOrder(OrderID,function(orders){
 			res.json(orders)
 		})
