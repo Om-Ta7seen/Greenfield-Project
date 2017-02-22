@@ -1,6 +1,6 @@
 angular.module('otbo5ly.userProfile', [])
 
-.controller('userProfileController', function ($scope, $routeParams, $window, $location, Users, OrderService) {
+.controller('userProfileController', function ($scope, $routeParams, $window, $location, Users, OrderService,Approve) {
   $scope.data = {};
   $scope.orders = {};
   
@@ -39,6 +39,15 @@ angular.module('otbo5ly.userProfile', [])
 		}
 	})
 	}
+
+	$scope.DeleteOrder = function(orderId){
+		console.log("ddddd",orderId)
+
+        Approve.DeleteOrder({orderId:orderId}).then(
+            console.log('in cancel order')
+        	)
+	}
+
 
 
 
