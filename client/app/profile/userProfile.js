@@ -78,7 +78,7 @@ angular.module('otbo5ly.userProfile', [])
 		console.log($scope.Sorder)
 
 		Special.AddSpecialOrder($scope.Sorder).then(function(){
-			console.log(" in add speacial")
+			
 		})
 	}
 

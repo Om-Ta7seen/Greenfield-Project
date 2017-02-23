@@ -15,6 +15,7 @@ exports.getOrdersByUserName = function (UserName, callback) {
 				 ,Orders.DeliveryDate \
 				 ,Orders.DeliverTime \
 				 ,Orders.approved\
+				 ,Orders.DisheName\
 				 ,Orders.ID as OrderID\
 				 ,Orders.Quantity \
 				 from Orders \
@@ -53,6 +54,7 @@ exports.getUserOrdersByUserName = function (UserName, callback) {
 				 ,Orders.DeliveryDate \
 				 ,Orders.DeliverTime \
 				 ,Orders.approved\
+				 ,Orders.DisheName\
 				 ,Orders.ID as OrderID\
 				 ,Orders.Quantity \
 				 from Orders \
@@ -117,7 +119,7 @@ exports.SpecialOrder = function (orderObj2, callback) {
 	console.log('in mooooozzzzzz',orderObj2)
 	var Query = 'insert into Orders (CookerID,UserID,DeliveryDate,DeliverTime,CookNamesID,Quantity,special,DisheName) \
                  values (:CookerID,:UserID,:DeliveryDate,:DeliverTime, :CookNamesID, :Quantity, :special, :DisheName)';
-	sequelize.query(Query, { replacements: { CookerID: orderObj2.CookerID, UserID: orderObj2.UserId, DeliveryDate: orderObj2.DeliveryDate, DeliverTime: orderObj2.DeliveryTime,CookNamesID:"noname" ,Quantity: orderObj2.Quantity,special :orderObj2.special,DisheName : orderObj2.DisheName}, type: Sequelize.QueryTypes.INSERT })
+	sequelize.query(Query, { replacements: { CookerID: orderObj2.CookerID, UserID: orderObj2.UserId, DeliveryDate: orderObj2.DeliveryDate, DeliverTime: orderObj2.DeliveryTime,CookNamesID:4 ,Quantity: orderObj2.Quantity,special :orderObj2.special,DisheName : orderObj2.DisheName}, type: Sequelize.QueryTypes.INSERT })
 		.then(callback)
 }
 
