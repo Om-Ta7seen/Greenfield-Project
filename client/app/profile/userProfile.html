@@ -23,7 +23,7 @@ $(document).ready(function(){
 
 
 
-<div class="container" ng-controller="userProfileController" ng-init="getProfile()">
+<div class="container" ng-controller="userProfileController" ng-init="getProfile();getAllCookers()">
 <div class="row" style="
 background: url('assets/inside-bg.jpg');
 background-position: top;
@@ -74,7 +74,7 @@ padding-top: 100px;
   Want a Special Dish</h1>
 
   <!-- Trigger the modal with a button -->
-  <button type="button" class="btn btn-default btn-lg" id="myBtn">Let's Order</button>
+  <button  type="button" class="btn btn-default btn-lg" id="myBtn">Let's Order</button>
 
   <!-- Modal -->
   <div ng-controller="userProfileController"
@@ -101,7 +101,7 @@ padding-top: 100px;
 
             <div class="form-group" ng-controller="userProfileController">
               <label for="DIshName"><span class="glyphicon glyphicon-user"></span> Select Cook</label>
-               <select ng-options="item for item in cookerName" class="form-control" name="singleSelect" ng-model="Sorder.cookerName" required>
+               <select ng-options="item for item in {{cookerName}}" class="form-control" name="singleSelect" ng-model="Sorder.cookerName" required>
                 </select>
             </div>
 

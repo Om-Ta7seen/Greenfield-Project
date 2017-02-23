@@ -4,6 +4,9 @@ angular.module('otbo5ly.userProfile', [])
   $scope.data = {};
   $scope.orders = {};
   $scope.Sorder = {};
+   // var b = []
+  $scope.cookerName = []
+
   
 
   $scope.getProfile = function(){
@@ -50,6 +53,11 @@ angular.module('otbo5ly.userProfile', [])
 	$scope.getAllCookers = function () {
 		Users.getAllCookers().then(function(data){
 			console.log(data)
+			for (var i = 0; i < data.length; i++) {
+				$scope.cookerName.push(data[i].UserName)
+
+			}
+			console.log($scope.cookerName)
 		})
 	}
 
