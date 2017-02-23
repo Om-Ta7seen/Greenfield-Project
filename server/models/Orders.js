@@ -76,6 +76,7 @@ exports.getOrderByID = function (ID, callback) {
 
 
 exports.addOrder = function (orderObj, callback) {
+	console.log('addddddd ordeeeer',orderObj)
 	var Query = 'insert into Orders (CookerID,UserID,DeliveryDate,DeliverTime,CookNamesID,Quantity) \
                  values (:CookerID,:UserID,:DeliveryDate,:DeliverTime, :CookNamesID, :Quantity)';
 	sequelize.query(Query, { replacements: { CookerID: orderObj.cookerID, UserID: orderObj.userID, DeliveryDate: orderObj.deliveryDate, DeliverTime: orderObj.deliveryTime,CookNamesID:orderObj.CookNamesID ,Quantity: orderObj.quantity }, type: Sequelize.QueryTypes.INSERT })
@@ -107,10 +108,16 @@ exports.DeleteOrder= function (ID, callback) {
 
 
 
-exports.SpecialOrder = function (orderObj, callback) {
-	var Query = 'insert into Orders (CookerID,UserID,DeliveryDate,DeliverTime,CookNamesID,Quantity,special,dishe) \
-                 values (:CookerID,:UserID,:DeliveryDate,:DeliverTime, :CookNamesID, :Quantity, :special, :dishe)';
-	sequelize.query(Query, { replacements: { CookerID: orderObj.cookerID, UserID: orderObj.userID, DeliveryDate: orderObj.deliveryDate, DeliverTime: orderObj.deliveryTime,CookNamesID:orderObj.CookNamesID ,Quantity: orderObj.quantity }, type: Sequelize.QueryTypes.INSERT })
+exports.SpecialOrder = function (orderObj2, callback) {
+
+	// var Query = 'insert into Orders (CookerID,UserID,DeliveryDate,DeliverTime,CookNamesID,Quantity) \
+ //                 values (:CookerID,:UserID,:DeliveryDate,:DeliverTime, :CookNamesID, :Quantity)';
+	// sequelize.query(Query, { replacements: { CookerID: orderObj.cookerID, UserID: orderObj.userID, DeliveryDate: orderObj.deliveryDate, DeliverTime: orderObj.deliveryTime,CookNamesID:orderObj.CookNamesID ,Quantity: orderObj.quantity }, type: Sequelize.QueryTypes.INSERT })
+	// 	.then(callback)
+	console.log('in mooooozzzzzz',orderObj2)
+	var Query = 'insert into Orders (CookerID,UserID,DeliveryDate,DeliverTime,CookNamesID,Quantity,special,DisheName) \
+                 values (:CookerID,:UserID,:DeliveryDate,:DeliverTime, :CookNamesID, :Quantity, :special, :DisheName)';
+	sequelize.query(Query, { replacements: { CookerID: orderObj2.CookerID, UserID: orderObj2.UserId, DeliveryDate: orderObj2.DeliveryDate, DeliverTime: orderObj2.DeliveryTime,CookNamesID:"noname" ,Quantity: orderObj2.Quantity,special :orderObj2.special,DisheName : orderObj2.DisheName}, type: Sequelize.QueryTypes.INSERT })
 		.then(callback)
 }
 

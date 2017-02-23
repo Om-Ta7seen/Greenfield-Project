@@ -172,6 +172,7 @@ module.exports = {
 	},
 	SpecialOrder: function(req, res){
 		var order = req.body;
+		console.log('btataaaa',order)
 		 
 		Orders.SpecialOrder(order, function(order){
 			res.json('Order Added'); 
