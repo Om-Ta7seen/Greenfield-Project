@@ -27,8 +27,8 @@ app.get('/api/userOrders/:username', handlers.getUserOrders);////
 app.post('/api/Approve',handlers.AcceptOrder);
 app.post('/api/cancelOrder',handlers.CancelOrder);
 app.post('/api/DeleteOrder',handlers.DeleteOrder);
-// app.get('/api/getAllCookerscookers/',handlers.GetAllCookers);
-// app.post('/api/AddSpecial',handlers.SpecialOrder) ;
+app.get('/api/getAllCookerscookers',handlers.GetAllCookers);
+app.post('/api/AddSpecial',handlers.SpecialOrder) ;
 
 app.listen(process.env.PORT || port);
 console.log('work on port '+ port )
