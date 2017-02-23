@@ -8,6 +8,11 @@
   .modal-footer {
       background-color: #f9f9f9;
   }
+    .animate-if {
+    /*font-family: Courier*/
+    color: red;
+    font-size: 150%
+   }
   </style>
 
 
@@ -182,7 +187,8 @@ padding-top: 100px;
           <dd>- {{ order.CLientFullName }}</dd>
         </li>
         <li><strong>Cook Name:</strong>
-          <dd>- {{ order.Name }}</dd>
+        <dd ng-if ="order.Name != 'special'" >- {{ order.Name }}</dd>
+          <dd ng-if ="order.Name == 'special'" class="animate-if" >- special order --{{ order.DisheName }}</dd>
         </li>
         <br>
         <li><strong>Amount:</strong>

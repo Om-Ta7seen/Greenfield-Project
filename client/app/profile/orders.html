@@ -28,6 +28,17 @@
       border-top: 10px solid #2196F3;
 
     }
+    .animate-if {
+  	/*font-family: Courier*/
+    color: red;
+    font-size: 150%
+   }
+   .animate-iff {
+  background:white;
+  border:1px solid black;
+  padding:10px;
+  }
+
   </style>
 
 
@@ -48,8 +59,9 @@
 				<li><strong>Client Name:</strong>
 					<dd>- {{ order.CLientFullName }}</dd>
 				</li>
-				<li><strong>Cook Name:</strong>
-					<dd>- {{ order.Name }}</dd>
+				<li  ><strong>Cook Name:</strong>
+					<dd ng-if ="order.Name != 'special'"  > {{ order.Name }}</dd>
+					<dd ng-if ="order.Name == 'special'"  class="animate-if">- special order -- {{ order.DisheName }}</dd>
 				</li>
 				<br>
 				<li><strong>Amount:</strong>
@@ -73,6 +85,7 @@
 
 		</div>
 		</div>
+		
 		</div>
 
 	
