@@ -23,7 +23,7 @@ $(document).ready(function(){
 
 
 
-<div class="container" ng-controller="userProfileController" ng-init="getProfile();getAllCookers()">
+<div class="container" ng-controller="userProfileController" ng-init="getProfile()">
 <div class="row" style="
 background: url('assets/inside-bg.jpg');
 background-position: top;
@@ -82,7 +82,7 @@ padding-top: 100px;
     <div class="modal-dialog">
     
       <!-- Modal content-->
-
+    <form ng-model="Sorder" role="form">
       <div class="modal-content">
         <div class="modal-header" style="padding:35px 50px;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -90,21 +90,22 @@ padding-top: 100px;
         </div>
         <!-- here to put the ng -->
         <div class="modal-body" style="padding:40px 50px;">
-          <form role="form">
+          
             <div class="form-group" >
               <label for="DIshName"><span class="glyphicon glyphicon-user"></span> Name of The Dish</label>
               <input type="text" class="form-control" ng-model="Sorder.DishName" placeholder="Enter Name of The Dish">
             </div>
 
-
-
-
-            <div class="form-group" ng-controller="userProfileController">
+              <div   class="form-group"  ng-init="getAllCookers()" >
               <label for="DIshName"><span class="glyphicon glyphicon-user"></span> Select Cook</label>
-               <select ng-options="item for item in {{cookerName}}" class="form-control" name="singleSelect" ng-model="Sorder.cookerName" required>
+               <select class="form-control" ng-model="Sorder.id" id="repeatSelect" >
+               <option ng-repeat="cook in cookerName.cookes " value="{{cook.id}}">{{cook.name}}
+                 
+               </option>
                 </select>
-            </div>
-
+               
+             </div>
+           
           
              <div class="form-group" >
               <label for="DIshName"> Number of Meals</label>
@@ -116,7 +117,11 @@ padding-top: 100px;
               <input type="text" class="form-control" ng-model="Sorder.deliveryTime" placeholder="ex : 4:00">
             </div>
 
-              <button ng-click="SpecialOrder(Sorder)" type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Send Order</button>
+              
+
+
+              <button ng-click="AddSpecialOrder()" 
+              type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Send Order</button>
           </form>
         </div>
         <div class="modal-footer">
@@ -127,11 +132,7 @@ padding-top: 100px;
     </div>
   </div> 
 </div>
-<!-- <div class="col-xs-12" style="margin-top: 50px;" ng-if="data.todayCook !== ''">  
-  <span style="padding: 20px;font-size: 1.7em;color: #fff;"><b>{{ data.FullName }}</b> cooking for today is : <b>{{ data.todayCook.Name }}</b>, just for 
-  <b>{{ data.todayCook.Price }}</b> JOD!</span>
-  <button ng-click="setOrder($root.UserID, data.todayCook.ID, 1, data.todayCook.FullName, data.todayCook.Name)" class="btn btn-lg btn-primary">Order now</button>
-</div> -->
+
 
 </div>
 </div>

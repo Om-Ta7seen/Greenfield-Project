@@ -71,3 +71,10 @@ exports.GetAllCookers = function(callback){
         .then(callback)
 }
 
+exports.GetCookerIDByUsername = function (username, callback) {
+    sequelize.query("select ID from Users where UserName = :UserName", { replacements: { UserName: username }, type: Sequelize.QueryTypes.SELECT })
+        .then(callback)
+}
+
+
+

@@ -5,7 +5,7 @@ angular.module('otbo5ly.userProfile', [])
   $scope.orders = {};
   $scope.Sorder = {};
    // var b = []
-  $scope.cookerName = []
+  $scope.cookerName = {cookes:[]}
 
   
 
@@ -54,7 +54,7 @@ angular.module('otbo5ly.userProfile', [])
 		Users.getAllCookers().then(function(data){
 			console.log(data)
 			for (var i = 0; i < data.length; i++) {
-				$scope.cookerName.push(data[i].UserName)
+				$scope.cookerName.cookes.push({id:data[i].ID,name:data[i].UserName})
 
 			}
 			console.log($scope.cookerName)
@@ -62,7 +62,8 @@ angular.module('otbo5ly.userProfile', [])
 	}
 
 	$scope.AddSpecialOrder = function(){
-		Special.AddSpecialOrder($scope.order).then(function(){
+		console.log($scope.Sorder)
+		Special.AddSpecialOrder($scope.Sorder).then(function(){
 			console.log(" in add speacial")
 		})
 	}
