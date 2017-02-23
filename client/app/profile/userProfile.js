@@ -3,8 +3,21 @@ angular.module('otbo5ly.userProfile', [])
 .controller('userProfileController', function ($scope, $routeParams, $window,$route, $location, Users, OrderService,Approve,Special) {
   $scope.data = {};
   $scope.orders = {};
-  $scope.Sorder = {};
-   // var b = []
+  $scope.Sorder = {
+  	special:'yse',
+  	DeliveryDate:1,
+  	UserId:1,
+
+  };
+  var getDeliveryDate = function(){
+		var todayDate = new Date();
+		todayDate.setDate(todayDate.getDate() + 1);
+		return todayDate;
+	}
+	$scope.Sorder.DeliveryDate = getDeliveryDate().toISOString().slice(0,10);
+  	$scope.Sorder.UserId= (JSON.parse($window.localStorage.getItem('user.otbo5ly')).ID)
+
+
   $scope.cookerName = {cookes:[]}
 
   
@@ -63,6 +76,7 @@ angular.module('otbo5ly.userProfile', [])
 
 	$scope.AddSpecialOrder = function(){
 		console.log($scope.Sorder)
+
 		Special.AddSpecialOrder($scope.Sorder).then(function(){
 			console.log(" in add speacial")
 		})

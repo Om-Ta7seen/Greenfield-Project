@@ -98,7 +98,7 @@ padding-top: 100px;
 
               <div   class="form-group"  ng-init="getAllCookers()" >
               <label for="DIshName"><span class="glyphicon glyphicon-user"></span> Select Cook</label>
-               <select class="form-control" ng-model="Sorder.id" id="repeatSelect" >
+               <select class="form-control" ng-model="Sorder.CookerID" id="repeatSelect" >
                <option ng-repeat="cook in cookerName.cookes " value="{{cook.id}}">{{cook.name}}
                  
                </option>
@@ -109,14 +109,15 @@ padding-top: 100px;
           
              <div class="form-group" >
               <label for="DIshName"> Number of Meals</label>
-              <input type="text" class="form-control" ng-model="Sorder.quantity" placeholder="Quantity">
+              <input type="text" class="form-control" ng-model="Sorder.Quantity" placeholder="Quantity">
             </div>
 
              <div class="form-group" >
               <label for="DIshName"> Delivery Time</label>
-              <input type="text" class="form-control" ng-model="Sorder.deliveryTime" placeholder="ex : 4:00">
+              <input type="text" class="form-control" ng-model="Sorder.DeliveryTime" placeholder="ex : 4:00">
             </div>
 
+            
               
 
 
