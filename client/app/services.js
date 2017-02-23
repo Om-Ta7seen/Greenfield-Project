@@ -134,6 +134,7 @@ angular.module('otbo5ly.services', [])
         method: 'GET',
         url: '/api/getAllCookerscookers/'
       }).then(function(resp){
+         
         return resp.data;
       }).catch(function(err){
         if(err){
