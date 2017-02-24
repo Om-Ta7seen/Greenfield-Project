@@ -24,7 +24,6 @@ angular.module('otbo5ly.userProfile', [])
 
   $scope.getProfile = function(){
 	Users.getUserProfile($routeParams.user).then(function(data) {
-		console.log(data)
 		if(data.UserTypeName === 'user'){
 			$scope.data = data;	
 		} else {
@@ -65,17 +64,14 @@ angular.module('otbo5ly.userProfile', [])
 
 	$scope.getAllCookers = function () {
 		Users.getAllCookers().then(function(data){
-			console.log(data)
 			for (var i = 0; i < data.length; i++) {
 				$scope.cookerName.cookes.push({id:data[i].ID,name:data[i].UserName})
 
 			}
-			console.log($scope.cookerName)
 		})
 	}
 
 	$scope.AddSpecialOrder = function(){
-		console.log($scope.Sorder)
 
 		Special.AddSpecialOrder($scope.Sorder).then(function(){
 			

@@ -6,7 +6,6 @@ angular.module('otbo5ly.profile', [])
 
   $scope.getProfile = function(){
 	Users.getCookerProfile($routeParams.user).then(function(data) {
-		console.log(data)
 		if(data.UserTypeName === 'cooker'){
 			$scope.data = data;	
 		} else {
@@ -18,7 +17,6 @@ angular.module('otbo5ly.profile', [])
   $scope.getOrders = function(){
 	Users.getCookerOrders($routeParams.user).then(function(data){
 		if(JSON.parse($window.localStorage.getItem('user.otbo5ly')).UserTypeName === "cooker"){
-			console.log("oooooooooooooooooo",data)
 			$scope.orders = data;	
 		} else {
 			$location.path('/');
@@ -34,7 +32,6 @@ angular.module('otbo5ly.profile', [])
 	$scope.acceptOrder = function(orderId){
 		console.log(orderId)
 
-		console.log('in accept order')
 		Approve.acceptOrder({orderId:orderId}).then(function(){
         	$route.reload();
 

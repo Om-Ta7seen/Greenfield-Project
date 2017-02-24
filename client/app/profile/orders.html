@@ -51,6 +51,8 @@
 		
 		<div ng-class="myVar ||  order.approved " >
 		<div class="ifo" >
+
+			<!-- <img ng-src="{{order.img}}" class="pull-right img-rounded " style="width: 400px height: 400px ; "/> --> 
 			<h2><strong><center>Order Details</center></strong></h2>
 
 			<ul style="font-size:18px">	
@@ -68,7 +70,7 @@
 				<dd>- {{ order.Quantity }}</dd>
 				</li>
 				
-				<li><strong>The Client Will Receive The Order AT :</strong>
+				<li><strong>Delivery Time :</strong>
 					<dd>- {{ order.DeliveryDate }}    - at {{order.DeliverTime}}</dd>
 				</li>
 				<br>

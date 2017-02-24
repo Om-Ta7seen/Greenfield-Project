@@ -18,7 +18,6 @@ module.exports = {
 					res.json(Object.assign(user[0], {token: token}));
 				}
 				else{
-					console.log('Wrong username Or password')
 					res.status(500).json('Wrong username Or password')
 				}
 			}
@@ -78,7 +77,6 @@ module.exports = {
 
 					if(cook.length>0){
 						Object.assign(profile,{todayCook:cook[0]});
-						console.log("profile5555_________",profile.todayCook)
 
 					}
 					else{
@@ -105,7 +103,6 @@ module.exports = {
 
 	addOrder: function(req, res){
 		var order = req.body;
-		console.log('wwwwwwwwwwwwwwwwwww',res.json())
 		Orders.addOrder(order, function(order){
 			res.json('Order Added'); 
 		})
@@ -144,13 +141,11 @@ module.exports = {
 		var profile = {};
 		Users.getUserProfileInfo(username, function(user){
 			Object.assign(profile,user[0]);
-			console.log("************",profile)
 			res.json(profile)
 		})
 	},
 	AcceptOrder : function(req,res){
 		var OrderID = req.body.orderId;
-		console.log('--=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-',req.body.orderId)
 		Orders.AcceptOrder(OrderID,function(orders){
 
 			res.json(orders)
@@ -165,15 +160,12 @@ module.exports = {
 	},
 	DeleteOrder : function(req,res){
 		var OrderID = req.body.orderId;
-		console.log("in handlerrrrrrrrrrrrrrr",OrderID)
 		Orders.DeleteOrder(OrderID,function(orders){
 			res.json(orders)
 		})
 	},
 	SpecialOrder: function(req, res){
 		var order = req.body;
-		console.log('btataaaa',order)
-		 
 		Orders.SpecialOrder(order, function(order){
 			res.json('Order Added'); 
 		})
