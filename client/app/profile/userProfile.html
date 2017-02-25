@@ -97,12 +97,12 @@ padding-top: 100px;
         <div class="modal-body" style="padding:40px 50px;">
           
             <div class="form-group" >
-              <label for="DIshName"><span class="glyphicon glyphicon-user"></span> Name of The Dish</label>
+              <label for="DIshName"><span ></span> Name of The Dish</label>
               <input type="text" class="form-control" ng-model="Sorder.DisheName" placeholder="Enter Name of The Dish">
             </div>
 
               <div   class="form-group"  ng-init="getAllCookers()" >
-              <label for="DIshName"><span class="glyphicon glyphicon-user"></span> Select Cook</label>
+              <label for="DIshName"><span ></span> Select Cook</label>
                <select class="form-control" ng-model="Sorder.CookerID" id="repeatSelect" >
                <option ng-repeat="cook in cookerName.cookes " value="{{cook.id}}">{{cook.name}}
                  
