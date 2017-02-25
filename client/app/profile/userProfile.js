@@ -72,10 +72,12 @@ angular.module('otbo5ly.userProfile', [])
 	}
 
 	$scope.AddSpecialOrder = function(){
-
 		Special.AddSpecialOrder($scope.Sorder).then(function(){
-			
+		alert('your order has been sent successfully')
+		$window.location.reload();
 		})
+			
+			
 	}
 
 
