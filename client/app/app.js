@@ -4,6 +4,7 @@ angular.module('otbo5ly', [
   'otbo5ly.auth',
   'otbo5ly.main',
   'otbo5ly.newOrder',
+  'otbo5ly.userProfile',
   'ngRoute'
 ])
 .config(function ($routeProvider, $httpProvider) {
@@ -37,6 +38,10 @@ angular.module('otbo5ly', [
     .when('/', {
       templateUrl: 'app/main/main.html',
       controller: 'MainController'
+    })
+    .when('/userProfile/:user', {
+      templateUrl: 'app/profile/userProfile.html',
+      controller: 'userProfileController'
     })
     .otherwise({redirectTo:'/'});
 

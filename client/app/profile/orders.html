@@ -1,46 +1,94 @@
 <!-- In this page we are sending the cooker a message telling him
 	about the client's order details (time, cookName and quantity). -->
 <!-- We don't really care about the date because it will be sent the next day always. -->
-	<style>
+	<!-- <style>
 		.info {
 			background-color: #e7f3fe;
 			border-left: 30px solid #2196F3;
 		}
-	</style>
+	</style> -->
+	 <style>
+    .none {
+      background-color: #e7f3fe;
+      border-left: 30px solid #2196F3;
+    }
+    .yes{
+      background-color: #e7f3fe;
+      border-left: 30px solid #096d27;
+    }
+    .no {
+      background-color: #e7f3fe;
+      border-left: 30px solid #b21813;
+    }
+    .ifo{
+      background-color: #e7f3fe;
+      border-left: 10px solid #2196F3;
+      border-right: 10px solid #2196F3;
+      border-bottom: 10px solid #2196F3;
+      border-top: 10px solid #2196F3;
+
+    }
+    .animate-if {
+  	/*font-family: Courier*/
+    color: red;
+    font-size: 150%
+   }
+   .animate-iff {
+  background:white;
+  border:1px solid black;
+  padding:10px;
+  }
+
+  </style>
+
+
 
 	<div class="container" ng-controller="ProfileController" ng-init="getOrders()">
 		<br><br><br><br>
+
 		<h2><center><strong>You Have New Order</strong></center></h2>
-		<div class="info" ng-repeat="order in orders"><br>
+		<div  ng-repeat="order in orders" ><br>
+		
+		<div ng-class="myVar ||  order.approved " >
+		<div class="ifo" >
+
+			<!-- <img ng-src="{{order.img}}" class="pull-right img-rounded " style="width: 400px height: 400px ; "/> --> 
 			<h2><strong><center>Order Details</center></strong></h2>
-			<ul style="font-size:18px">
+
+			<ul style="font-size:18px">	
+
 
 				<li><strong>Client Name:</strong>
 					<dd>- {{ order.CLientFullName }}</dd>
 				</li>
-				<li><strong>Cook Name:</strong>
-					<dd>- {{ order.Name }}</dd>
+				<li  ><strong>Cook Name:</strong>
+					<dd ng-if ="order.Name != 'special'"  > {{ order.Name }}</dd>
+					<dd ng-if ="order.Name == 'special'"  class="animate-if">- special order -- {{ order.DisheName }}</dd>
 				</li>
 				<br>
 				<li><strong>Amount:</strong>
 				<dd>- {{ order.Quantity }}</dd>
 				</li>
-				<br>
-				<li><strong>The Client Will Receive The Order AT :</strong>
+				
+				<li><strong>Delivery Time :</strong>
 					<dd>- {{ order.DeliveryDate }}    - at {{order.DeliverTime}}</dd>
 				</li>
+				<br>
+			    <li><strong ng-if= "order.approved == 'yes'"><p style=" font-size: 25px;"> You accepted This Order</p></strong></li>
+			    <li ng-if= "order.approved == 'none'"><strong ><p style=" font-size: 25px;">Do You Agree This Order</p>
+	        	<input  id="yesbtn" type="submit" value="yes" ng-click="myVar='yes';acceptOrder(order.OrderID)"
+	        	ng-model="order.approved">
+				<input id="nobtn" type="submit" value="no" ng-click="myVar='no';dos();cancelOrder(order.OrderID)"
+				ng-model="order.approved">
+				</strong>
+				</li>
+				<br>
+			</ul><br>
 
-			</ul><br>	
 		</div>
-		<br><br>
-		<center><strong>
-			<p style=" font-size: 25px;"> I Can Handle It	<input type="checkbox" ng-model = "accept" ng-init = "false">
-			</p>
-		</strong>
-	</center>
-	<div ng-if="accept">
-		<center>
-			<h3><strong>Okay, Let's Start Cooking...<span class="glyphicon glyphicon-cutlery"></strong></h3>		
-		</center>
-	</div>
+		</div>
+		
+		</div>
+
+	
 </div>

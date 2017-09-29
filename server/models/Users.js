@@ -35,6 +35,16 @@ exports.getUserByUsername = function (username, callback) {
         .then(callback)
 }
 
+
+// select Users.ID,Users.FullName ,Users.UserName , count(Orders.ID) as OrderNums,Users.Address 
+//                  from CookerSchedule  
+//                  join Users on Users.ID = CookerSchedule.CookerID  
+//                  join CookNames on CookNames.ID = CookerSchedule.CookNamesID  
+//                  left join Orders on Orders.CookerID = Users.ID 
+//                  group by Users.ID,Users.FullName,Users.Address 
+//                  order by count(Orders.ID) desc
+
+
 exports.getTopCookers = function (callback) {
     var Query = 'select Users.ID,Users.FullName ,Users.UserName , count(Orders.ID) as OrderNums,Users.Address \
                  from CookerSchedule  \
@@ -55,6 +65,16 @@ exports.addUser = function (userObj, callback) {
         .then(callback)
 }
 
+exports.GetAllCookers = function(callback){
+    var Query = 'select * from users where UserTypeName="cooker" ';
+      sequelize.query(Query, { type: Sequelize.QueryTypes.SELECT })
+        .then(callback)
+}
+
+exports.GetCookerIDByUsername = function (username, callback) {
+    sequelize.query("select ID from Users where UserName = :UserName", { replacements: { UserName: username }, type: Sequelize.QueryTypes.SELECT })
+        .then(callback)
+}
 
 
 

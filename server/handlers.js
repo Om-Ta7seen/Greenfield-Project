@@ -18,7 +18,6 @@ module.exports = {
 					res.json(Object.assign(user[0], {token: token}));
 				}
 				else{
-					console.log('Wrong username Or password')
 					res.status(500).json('Wrong username Or password')
 				}
 			}
@@ -74,8 +73,11 @@ module.exports = {
 					Object.assign(profile,{schedule:schedule});
 				}
 				CookerSchedule.getCookerTodayCook(username, function(cook){
+				
+
 					if(cook.length>0){
 						Object.assign(profile,{todayCook:cook[0]});
+
 					}
 					else{
 						Object.assign(profile,{todayCook:''});
@@ -126,6 +128,56 @@ module.exports = {
 		CookerSchedule.getAllCookByDayNameOrderdByPrice(function(result){
 			res.json(result)
 		})
+	},
+	//////////////////////user
+	getUserOrders: function(req, res){
+		var username = req.params.username;
+		Orders.getUserOrdersByUserName(username, function(orders){
+			res.json(orders);
+		})
+	},
+		getUserProfile: function(req, res){
+		var username = req.params.username;
+		var profile = {};
+		Users.getUserProfileInfo(username, function(user){
+			Object.assign(profile,user[0]);
+			res.json(profile)
+		})
+	},
+	AcceptOrder : function(req,res){
+		var OrderID = req.body.orderId;
+		Orders.AcceptOrder(OrderID,function(orders){
+
+			res.json(orders)
+		})
+
+	},
+	CancelOrder : function(req,res){
+		var OrderID = req.body.orderId;
+		Orders.CancelOrder(OrderID,function(orders){
+			res.json(orders)
+		})
+	},
+	DeleteOrder : function(req,res){
+		var OrderID = req.body.orderId;
+		Orders.DeleteOrder(OrderID,function(orders){
+			res.json(orders)
+		})
+	},
+	SpecialOrder: function(req, res){
+		var order = req.body;
+		Orders.SpecialOrder(order, function(order){
+			res.json('Order Added'); 
+		})
+	},
+	GetAllCookers :function(req, res){
+		Users.GetAllCookers(function(cookers){
+			if(cookers){
+				res.json(cookers);
+			}
+		})
 	}
 
+
 }
+	

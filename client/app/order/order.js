@@ -1,7 +1,7 @@
 angular.module('otbo5ly.newOrder', [])
 
 
-.controller('NewOrderController', function ($scope, $location, Users, Auth, OrderService) {
+.controller('NewOrderController', function ($scope, $location, Users, Auth, OrderService,$rootScope) {
 	
 	$scope.order = {};
 
@@ -27,7 +27,8 @@ angular.module('otbo5ly.newOrder', [])
 				alert('Something went wrong try again');
 			} else {
 				alert('your order has been sent successfully')
-				$location.path('/');
+				  $rootScope.isUser = true;
+				$location.path('/userProfile/:user');
 			}
 		})
 	}

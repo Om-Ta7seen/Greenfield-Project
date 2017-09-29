@@ -11,18 +11,16 @@ angular.module('otbo5ly.auth', [])
   $scope.signin = function () {
       Auth.signin($scope.user)
         .then(function (data) {
-          //console.log(data)
-
           if(data.status === '500'){
             $scope.msg = 'Wrong password or username!'
           } else {
 
             $scope.msg = '';
-
             $window.localStorage.setItem('com.otbo5ly', data.token);
 
             var userData = {ID:data.ID, 
               UserName: data.UserName, UserTypeName: data.UserTypeName};
+
  
             $window.localStorage.setItem('user.otbo5ly', JSON.stringify(userData));
 
@@ -33,9 +31,10 @@ angular.module('otbo5ly.auth', [])
             if(data.UserTypeName === 'cooker'){
               $rootScope.isCooker = true;
               $location.path('/users/'+ data.UserName );
-            } else {
-              $location.path('/');
-            }
+            }else if(data.UserTypeName === 'user'){
+                $rootScope.isUser = true;
+                $location.path('/userProfile/'+data.UserName);
+            }else{ $location.path('/') }
             
           }
 
@@ -54,7 +53,6 @@ angular.module('otbo5ly.auth', [])
       }
       Auth.signup($scope.user)
         .then(function (data) {
-          //console.log(data)
 
          if(data.status === '500'){
             $scope.msg = 'Wrong password or username!'

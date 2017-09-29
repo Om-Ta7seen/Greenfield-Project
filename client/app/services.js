@@ -9,7 +9,6 @@ angular.module('otbo5ly.services', [])
         url: '/api/topCookers',
         })
         .then(function (resp) {
-          console.log(resp.data);
           return resp.data;
         }).catch(function(err){
           if(err) {
@@ -25,7 +24,6 @@ angular.module('otbo5ly.services', [])
         url: '/api/orders/'+ username,
         })
         .then(function (resp) {
-          console.log(resp.data);
           return resp.data;
         }).catch(function(err){
           if(err) {
@@ -41,7 +39,6 @@ angular.module('otbo5ly.services', [])
         url: '/api/users/'+ username,
         })
         .then(function (resp) {
-          console.log(resp.data);
           return resp.data;
         }).catch(function(err){
           if(err) {
@@ -57,7 +54,6 @@ angular.module('otbo5ly.services', [])
         url: '/api/todayCookings/',
         })
         .then(function (resp) {
-          console.log(resp.data);
           return resp.data;
         }).catch(function(err){
           if(err) {
@@ -73,7 +69,6 @@ angular.module('otbo5ly.services', [])
         url: '/api/cookingNames',
         })
         .then(function (resp) {
-          console.log(resp.data);
           return resp.data;
         }).catch(function(err){
           if(err) {
@@ -97,6 +92,49 @@ angular.module('otbo5ly.services', [])
             return {status:500};
           }
       });
+    },
+    //////////////////////
+    getUserProfile : function(username){
+      return $http({
+        method: 'GET',
+        url: '/api/userProfile/'+ username, 
+        })
+        .then(function (resp) {
+          return resp.data;
+        }).catch(function(err){
+          if(err) {
+            console.log(err);
+            throw err;
+          }
+      });
+    },
+    getUserOrders : function(username){
+      return $http({
+        method: 'GET',
+        url: '/api/userOrders/'+ username,
+        })
+        .then(function (resp) {
+          return resp.data;
+        }).catch(function(err){
+          if(err) {
+            console.log(err);
+            throw err;
+          }
+      });
+    },
+    getAllCookers : function(){
+      return $http({
+        method: 'GET',
+        url: '/api/getAllCookerscookers/'
+      }).then(function(resp){
+         
+        return resp.data;
+      }).catch(function(err){
+        if(err){
+          console.log(err);
+          throw err;
+        }
+      })
     }
 
   }
@@ -173,4 +211,67 @@ angular.module('otbo5ly.services', [])
       order = {};
     }
   }
+})
+
+.factory('Approve', function($http,$window, $location){
+  return {
+    cancelOrder : function(orderId){
+
+      return $http({
+          method: 'POST',
+          url: '/api/cancelOrder',
+          data: orderId
+        })
+        .then(function (resp) {
+
+          return resp.data;
+        });
+  },
+    
+    acceptOrder : function(orderId){
+       return $http({
+          method: 'POST',
+          url: '/api/Approve',
+          data: orderId
+        })
+        .then(function (resp) {
+          return resp.data;
+        });
+    },
+    DeleteOrder : function (orderId){
+      return $http({
+        method: 'POST',
+        url   : '/api/DeleteOrder',
+        data  : orderId
+      })
+      .then(function(resp){
+        return resp.data;
+      })
+    }
+  }
+})
+
+.factory('Special',function($http,$window, $location){
+  return{
+    AddSpecialOrder : function(order){
+      return $http({
+        method: 'POST',
+        url   : '/api/AddSpecial',
+        data  : order 
+      })
+      .then(function (resp) {
+          return resp;
+        }).catch(function(err){
+          if(err) {
+            console.log(err);
+            return {status:500};
+          }
+    })
+ 
+   }
+ }
+
 });
+
+
+

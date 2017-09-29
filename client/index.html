@@ -6,6 +6,10 @@
   <title>Otbo5ly</title>
   <link rel="stylesheet" type="text/css" href="styles/style.css" />
   <link rel="stylesheet" type="text/css" href="styles/bootstrap/css/bootstrap.min.css" />
+  <!-- maher -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <!-- maher -->
+
 </head>
 
 <body ng-app='otbo5ly'>
@@ -43,8 +47,10 @@
               and if user is logged in
               its value is set when user sign in or signup
            -->
-          <li ng-show="$root.isCooker"><a href="#/users/{{ $root.UserName }}">My Profile</a></li>
-          <li ng-show="$root.isCooker"><a href="#/orders/{{ $root.UserName }}">My Orders</a></li>
+          <li ng-if="$root.isCooker"><a href="#/users/{{ $root.UserName }}">My Profile</a></li>
+         <li ng-if="$root.isCooker"><a href="#/orders/{{ $root.UserName }}">My order</a></li>
+          <li ng-if="$root.isUser"><a href="#/userProfile/{{ $root.UserName }}">My Profile</a></li>
+
           <li ng-show="!$root.isLoggedIn"><a href="#/signin">Sign In</a></li>
           <li ng-show="!$root.isLoggedIn"><a href="#/signup">Sign Up</a></li>
           <li ng-show="$root.isLoggedIn"><a href="#/signout">Sign out</a></li>
@@ -80,11 +86,17 @@
 <script src="styles/bootstrap/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
+<!-- maher -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- maher -->
+
 <script src="app/account/auth.js"></script>
 <script src="app/profile/profile.js"></script>
 <script src="app/main/main.js"></script>
 <script src="app/order/order.js"></script>
 <script src="app/services.js"></script>
+<script src="app/profile/userProfile.js"></script>
 <script src="app/app.js"></script>
 
 </body>

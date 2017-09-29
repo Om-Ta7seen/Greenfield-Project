@@ -4,7 +4,8 @@ angular.module('otbo5ly.main', [])
   $scope.data = {};
 
   	Users.getTodayCookings().then(function(data){
-  		$scope.data.cookings = data;
+      console.log(data)
+      $scope.data.cookings = data;
   	});
 
   	// Users.getTopCookers().then(function(data){
